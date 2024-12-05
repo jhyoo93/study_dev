@@ -32,3 +32,6 @@
    2) 물리적으로 분리하여 보안을 강화할 수 있다
       - SSL에 대한 암호복호화 처리에 웹 서버를 사용한다 
       - 웹 서버를 앞단에 두어, 공격이 있을 때 중요한 정보가 담김 DB나 WAS까지 전파되지 못하게 막는다     
+
+    <img src="/study/assets\web-service-architecture.png" />
+ 
