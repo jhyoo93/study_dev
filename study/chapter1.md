@@ -8,7 +8,7 @@
 # 웹서비스 구조 및 WEB과 WAS의 차이
   <br><br>
 
-  <h3>Static페이지 와 Dynamic페이지</h3>
+  ### Static페이지 와 Dynamic페이지
   <img src="/study\assets\static-vs-dynamic.png" />
 
   - Static Pages
@@ -18,7 +18,7 @@
     * 인자의 내용에 맞게 동적인 contens를 반환한다
     * 즉, 웹서버에 의해서 실행되는 프로그램을 통해 만들어진 결과물 Servlet: WAS 위에서 돌아가는 Java Program
 
-  <h3> Web Server와 WAS의 차이 </h3>
+  ### Web Server와 WAS의 차이
   <img src="/study\assets\webserver-vs-was1.png" />
 
   - 웹서버(Web Server) 란?
@@ -46,8 +46,39 @@
       - 정적인 콘텐츠도 처리 가능하나, 일반적으로는 웹 서버와 연동하여 사용
       - 분산 트랜잭션, 보안, 메시징, 쓰레드 처리 등의 기능을 지원하며, 주로 DB 서버와 함께 동작 
 
-  <h3>Web Service Architecture</h3>  
-  - Client -> WebServer -> WAS -> DB 동작과정
+  ### Web Service Architecture 
+  Client -> WebServer -> WAS -> DB 동작과정
 
   <img src="/study/assets\web-service-architecture.png" />
   
+# HTTP, HTTPS란?
+  - HTTP(HyperText Transfer Protocol)
+    인터넷에서 데이터를 주고 받기 위한 프로토콜(규칙)로, 주로 웹 브라우저와 서버 간의 통신에 사용된다
+    
+    * 특징
+      - HTTP는 데이터를 평문(암호화되지 않은 상태)으로 전송한다 따라서 네트워크 상에 데이터가 노출될 가능성이 있다
+      - 기본적으로 80번 포트를 사용한다
+      - HTTPS에 비해 상대적으로 빠를수 있으나 보안이 취약하다
+
+  - HTTPS (HyperText Transfer Protocol Secure)
+    HTTP에 보안(SSL/TLS 암호화)을 추가한 프로토콜로, 데이터를 암호화하여 안전하게 전송한다
+
+    * 특징
+      - HTTPS는 SSL(Secure Sockets Layer) 또는 TLS(Transport Layer Security)를 사용하여 데이터를 암호화한다.
+      - 기본적으로 433번 포트를 사용한다
+      - HTTPS를 구현하려면 SSL/TLS 인증서를 발급받아야한다
+      - 암호와 과정때문에 HTTP보다 약간 느릴 수 있으나, 최신 기술로 차이가 거의 없어졌다.
+  ### SSL/TLS 인증서란?
+    - SSL/TLS 인증서는 웹사이트와 사용자 간 데이터를 안전하게 주고받기 위해 사용하는 디지털 인증서이다
+      이 인증서를 통해 데이터는 암호화되어 해커가 중간에서 가로채더라도 내용을 알 수 없다
+      또한 인증서는 웹사이트가 신뢰할 수 있는 곳임을 증명한다.
+
+      #### 차이점과 특징
+        - SSL: 예전 방식으로, 현재는 사용되지 않는다
+        - TLS: SSL을 개선한 최신 방식으로, 현재 표준이다
+      #### 인증서의 역할
+        - 데이터 암호화: 개인정보나 비밀번호 등이 안전하게 전송된다.
+        - 신원 확인: 웹사이트의 주인이 누구인지 사용자에게 보증한다.
+        - 보안 강화: 데이터가 수정되거나 위조되지 않도록 보호한다. 
+      #### HTTPS와의 관계
+        - SSL/TLS 인증서가 설치된 웹사이트는 HTTPS를 사용하여 브라우저에 "안전한 사이트"로 표시된다.
