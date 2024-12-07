@@ -13,7 +13,7 @@
 
   - Static Pages
     * Web Server는 파일 경로 이름을 받아 경로와 일치하는 file contents를 반환한다.
-    * 항상 동ㅇ리한 페이지를 반환한다
+    * 항상 동일한 페이지를 반환한다
   - Dynamic Pages
     * 인자의 내용에 맞게 동적인 contens를 반환한다
     * 즉, 웹서버에 의해서 실행되는 프로그램을 통해 만들어진 결과물 Servlet: WAS 위에서 돌아가는 Java Program
@@ -46,14 +46,8 @@
       - 정적인 콘텐츠도 처리 가능하나, 일반적으로는 웹 서버와 연동하여 사용
       - 분산 트랜잭션, 보안, 메시징, 쓰레드 처리 등의 기능을 지원하며, 주로 DB 서버와 함께 동작 
 
- 
-  - Web Server와 WAS를 분리해 사용하는 이유
-    1) 서로의 기능을 분리하여 서버 부하를 방지할 수 있다
-        - WAS는 DB 조회 등 페이지를 만들기 위한 다양한 로직을 처리하는데, 단순한 정적 컨텐츠까지 WAS에서 제공하면
-          다른 작업에 사용하는 리소스로 인해 지연이 발생할수 있다
-    2) 물리적으로 분리하여 보안을 강화할 수 있다
-        - SSL에 대한 암호복호화 처리에 웹 서버를 사용한다 
-        - 웹 서버를 앞단에 두어, 공격이 있을 때 중요한 정보가 담김 DB나 WAS까지 전파되지 못하게 막는다     
+  <h3>Web Service Architecture</h3>  
+  - Client -> WebServer -> WAS -> DB 동작과정
 
-    <img src="/study/assets\web-service-architecture.png" />
- 
+  <img src="/study/assets\web-service-architecture.png" />
+  
