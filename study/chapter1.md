@@ -1,17 +1,22 @@
-# 서버와 클라이언트
+<h5>서버와 클라이언트</h5>
  - 서버는 네트워크를 통해 클라이언트의 요청을 받아들이고, 요청에 따라 데이터를 처리하거나 서비스를 제공하는 컴퓨터 시스템이다
    항상 실행 중이며 클라이언트의 요청을 대기하고 응답한다 주요 소프트웨어는 웹서버(Apache, Nginx), 데이터베이스 서버 등이 있다.
 
  - 클라이언트는 서버에 요청을 보내고, 응답받은 데이터를 사용자에게 보여주는 프로그램 또는 장치이다
    주로 웹 브라우저, 모바일 앱, 데스트톱 앱 등이 클라이언트로 사용되며 서버에서 제공된 데이터를 기반으로 사용자와 상호작용한다.
 
-# 웹서비스 구조 및 WEB과 WAS의 차이 
+<h5>웹서비스 구조 및 WEB과 WAS의 차이</h5>
   <br><br>
 
-  # Static페이지 와 Dynamic페이지
+  <h5>Static페이지 와 Dynamic페이지
   <img src="/study\assets\static-vs-dynamic.png" />
 
-
+  - Static Pages
+    * Web Server는 파일 경로 이름을 받아 경로와 일치하는 file contents를 반환한다.
+    * 항상 동ㅇ리한 페이지를 반환한다
+  - Dynamic Pages
+    * 인자의 내용에 맞게 동적인 contens를 반환한다
+    * 즉, 웹서버에 의해서 실행되는 프로그램을 통해 만들어진 결과물 Servlet: WAS 위에서 돌아가는 Java Program
 
   # Web Server와 WAS의 차이
   <img src="/study\assets\webserver-vs-was1.png" />
