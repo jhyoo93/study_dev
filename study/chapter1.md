@@ -4,6 +4,7 @@
 
  - 클라이언트는 서버에 요청을 보내고, 응답받은 데이터를 사용자에게 보여주는 프로그램 또는 장치이다
    주로 웹 브라우저, 모바일 앱, 데스트톱 앱 등이 클라이언트로 사용되며 서버에서 제공된 데이터를 기반으로 사용자와 상호작용한다.
+---
 
 # 웹서비스 구조 및 WEB과 WAS의 차이
   <br><br>
@@ -50,8 +51,9 @@
   Client -> WebServer -> WAS -> DB 동작과정
 
   <img src="/study/assets\web-service-architecture.png" />
-  
-# HTTP, HTTPS란?
+---
+
+# HTTP와 HTTPS차이
   - HTTP(HyperText Transfer Protocol)
     인터넷에서 데이터를 주고 받기 위한 프로토콜(규칙)로, 주로 웹 브라우저와 서버 간의 통신에 사용된다
     
@@ -82,3 +84,6 @@
         - 보안 강화: 데이터가 수정되거나 위조되지 않도록 보호한다. 
       #### HTTPS와의 관계
         - SSL/TLS 인증서가 설치된 웹사이트는 HTTPS를 사용하여 브라우저에 "안전한 사이트"로 표시된다.
+---
+
+# HTTP와 HTTPS차이
