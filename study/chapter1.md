@@ -154,7 +154,7 @@
 
   7. 서버가 HTTP 응답을 보낸다.
 
-    <img src="/study\assets\http-status-code.png" />    
+  <img src="/study\assets\http-status-code.png" />    
 
     Status Code헤더에 상태 코드가 숫자로 표시된다 이숫자는 response의 상태를 알려주기 때문에 매우 중요하다 숫자 코드를 사용하여
     HTTP응답 결과를 다섯 가지 상태로 나타낸다.
