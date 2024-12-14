@@ -36,11 +36,11 @@
   인터넷과 월드 와이드 웹(World Wide Web)의 발전과 깊은 관련이 있다 HTML은 웹페이지를 작성하고 표시하기 위한
   기본 언어로 시작되었으며, 시간이 지남에 따라 기능이 크게 확장 되었다.
 
-  World Wide Web이란?
+  - World Wide Web이란?
     - 인터넷을 기반으로 작동하는 서비스
     - HTML 문서로 작성된 정보를 HTTP 프로토콜을 통해 접근
     - 하이퍼텍스트(HyperText)를 사용하여 문서를 연결하고, URL을 통해 리소스를 식별
-  WWW의 핵심 구성요소
+  - WWW의 핵심 구성요소
     - URL (Uniform Resource Locator): 웹 페이지나 리소스의 주소
     - HTTP/HTTPS (HyperText Transfer Protocol): 서버와 클라이언트 간 데이터를 전송하는 프로토콜
     - HTML (HyperText Markup Language): 웹 페이지의 내용을 구조화하는 마크업 언어
