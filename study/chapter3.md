@@ -64,7 +64,7 @@
     Call Stack이 비어있고 Callback Queue에 대기중인 함수가 있을때 Callback Queue에 있는 콜백 함수를 순차적으로 Call Stack으로 
     옮겨주는 작업을 한다
 
-  ### Primise 내부 동작과정
+  ### Promise 함수 동작과정
 
   <img src="/study\assets\microTask.gif" />
 
