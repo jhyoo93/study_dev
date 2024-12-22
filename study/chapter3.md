@@ -63,3 +63,12 @@
     Call Stack에 현재 실행 중인 컨텍스트가 있는지, 그리고 Callback Queue에 대기중인 함수가 있는지 반복적으로 확인한다
     Call Stack이 비어있고 Callback Queue에 대기중인 함수가 있을때 Callback Queue에 있는 콜백 함수를 순차적으로 Call Stack으로 
     옮겨주는 작업을 한다
+
+  ### Primise 내부 동작과정
+
+  <img src="/study\assets\microTask.gif" />
+
+  Task queue와  MicroTask Queue 둘다 콜백 함수나 이벤트 핸들러를 일시 저장한다는 점에서 동일하다 하지만
+  태스크 큐보다 마이크로태스크 큐가 더 높은 우선순위를 가지게된다 즉 이벤트 루프는 콜 스택이 비어있을때 가장먼저 
+  마이크로태스크 큐에 대기하고 있는 함수를 먼저 처리한다 이후 마이크로태스크 큐가 비어있으면 태스크 큐에 대기하고있는
+  함수를 처리하게된다
