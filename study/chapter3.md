@@ -1,9 +1,9 @@
-# JavaScript란 무엇인가?
+# 자바스크립트(JavaScript)란?
 JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프로그래밍 언어이다 **1995년 넷스케이프(Netscape)** 에서 처음 개발되었으며, 초창기에는 웹 브라우저에서 동적인 기능을 추가하기 위한 간단한 스크립트 언어로 시작되었다. 이후 지속적인 발전과 표준화를 거치며, 오늘날에는 클라이언트 및 서버 측 애플리케이션, 모바일 앱 등 다방면에서 사용되는 현대적인 언어로 자리 잡게되었다.
 
 ---  
-
-## JavaScript 정의
+  
+## 자바스크립트(JavaScript) 정의
 JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방식의 **멀티-패러다임(multi-paradigm)** 언어이다
 웹 브라우저에서 실행되는 클라이언트 측 스크립트로 시작했지만, 현재는 서버, 모바일, 데스크탑 애플리케이션 등 
 다양한 환경에서 활용된다.
@@ -38,8 +38,7 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 
 
 ### JavaScript의 프로그래밍 스타일(멀티-패러다임)
-  JavaScript는 **객체지향(Object-Oriented)**, **이벤트 기반(Event-Driven)**, **함수형(Functional)**   
-  프로그래밍 스타일을 지원하는 유연한 언어이다    
+  JavaScript는 **객체지향(Object-Oriented)**, **이벤트 기반(Event-Driven)**, **함수형(Functional)** 프로그래밍 스타일을 지원하는 유연한 언어이다    
 
   **객체지향(Object-Oriented)**  
   JavaScript는 데이터를 객체 형태로 관리하며, 클래스와 프로토타입을 활용해 재사용 가능한 코드를 작성할 수 있고 객체지향 프로그래밍을 통해 데이터와    동작을 묶어서 더 구조적인 코드를 작성할 수 있다.    
@@ -66,7 +65,7 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   **예시:**  
   ```javascript
       document.getElementById("myButton").addEventListener("click", () => {
-        console.log("Button was clicked!");
+        console.log("Button Click!");
       });
   ```
 
@@ -88,7 +87,7 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 
 
   **절차 지향과 객체지향 프로그래밍**  
-  
+
     - 절차지향 프로그래밍  
       "절차적"이라는 말 답게, 순차적으로 실행되는 명령어들의 집합으로 구성된다    
       대표적으로 언어로는 C언어가 절차적 프로그래밍 특징을 가지고있다  
@@ -99,7 +98,7 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
       Java, Python, C++, 그리고 JavaScript는 객체 지향 프로그래밍 특징을 가지고 있다  
 
 ---  
-
+  
 # 자바스크립트의 동작원리
 
   ### 싱글 스레드
