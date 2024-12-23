@@ -107,13 +107,14 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   **Memory Heap**   
   - 동적으로 생성된 객체와 함수가 저장되는 메모리 영역  
   - 객체나 배열 같은 참조 타입 데이터는 힙에 저장  
+
   **Call Stack**   
   - 함수 호출이 관리되는 메모리 영역  
   - 함수가 호출되면 스택에 추가되고, 실행이 완료되면 스택에서 제거된다  
 
-### ✔ 호출 스택
-  자바스크립트는 **싱글스레드**  로 작업을 처리한다 Call Stack에 쌓인 함수나 코드를 위에서 부터 아래로 차례대로 실행한다
-  순서 대로 실행함으로 하나의 작업이 끝날 때까지 또 다른 작업을 실행하지 않는다.
+### ✔ 호출 스택  
+  자바스크립트는 **싱글스레드**  로 작업을 처리한다 Call Stack에 쌓인 함수나 코드를 위에서 부터 아래로 차례대로 실행한다  
+  순서 대로 실행하므로 하나의 작업이 끝날 때까지 또 다른 작업을 실행하지 않는다.  
 
   ```javascript
       function first() {
@@ -129,10 +130,20 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
           console.log("third");
       }
 
-      first(); // 함수 호출
-
+      first(); // 호출
+      
+      /**
+       * console
+       * 
+       * third
+       * second
+       * first
+       */
+ 
   ```
-
+  first함수가 호출되고 first함수 안에 second함수가 호출되며, 마지막으로 third함수가 호출된다 호출된 함수들은 Call Stack에 쌓이게 되며,     
+  위에서 부터 아래로 실행 된다 **main()** 함수는 처음 실행시 전역 컨텍스트이며 third -> second -> first -> main 순으로 pop되고  
+  main까지 실행완료되면 Call Stack이 비워진다.
 
 
 
