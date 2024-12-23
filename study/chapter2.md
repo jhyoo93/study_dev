@@ -14,6 +14,7 @@
   <img src="/study\assets\images_strivepdev_post.png" />
 
   ### HTML문서 기본 구조
+  ```HTML
     <!DOCTYPE html>
     <html>
       <head>
@@ -30,7 +31,8 @@
     <html>: 문서의 루트(root) 요소
     <head>: 메타데이터(문서 제목, 문자 인코딩 등)를 포함
     <body>: 웹 브라우저에 표시될 콘텐츠를 포함
-
+  ```
+      
   ### HTML역사
 
   인터넷과 월드 와이드 웹(World Wide Web)의 발전과 깊은 관련이 있다 HTML은 웹페이지를 작성하고 표시하기 위한
