@@ -10,7 +10,7 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 웹 브라우저에서 실행되는 클라이언트 측 스크립트로 시작했지만, 현재는 서버, 모바일, 데스크탑 애플리케이션 등 
 다양한 환경에서 활용된다.
 
-### ✔동적  
+### ✔ 동적  
   JavaScript는 동적인 특성을 지니고 있어, 코드 실행 중에도 변수의 데이터 타입을 변경하거나 객체의 구조를 수정할 수 있다
   이는 유연성과 적응성을 제공하지만, 코드의 안정성을 낮출 가능성도 있다  
 
@@ -23,14 +23,14 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   ```
   이러한 동적 특성은 개발 초기 단계에서는 편리하지만, 대규모 프로젝트에서는 타입 혼란을 초래할 수 있다.
 
-### ✔인터프리터 언어 
+### ✔ 인터프리터 언어 
   JavaScript는 대표적인 인터프리터 언어로, 소스 코드를 한 줄씩 읽고 바로 실행하는 방식을 따른다. 인터프리터 언어는 별도의 컴파일 과정 없이 코드를 즉시 실행하기 때문에 개발 과정에서 빠르게 테스트하고 수정할 수 있는 장점이 있다. 대표적인 프로그램 언어로 JavaScript와 Python이 있다.
       
   1. 코드를 작성한 뒤 별도의 컴파일 없이 바로 실행할 수 있다.  
   2. 코드를 실행하는 중에 데이터 타입 변경이나 함수 추가와 같은 동적인 작업이 가능하다.  
   3. 코드가 실행 중에 해석되기 때문에 컴파일된 코드보다 실행 속도가 느릴 수 있다.   
   
-### ✔컴파일 언어
+### ✔ 컴파일 언어
   컴파일 언어는 코드를 실행하기 전에 전체 코드를 한 번에 번역(컴파일)하여 기계어로 변환하는 프로그래밍 언어를 말한다 
   대표적인 컴파일 언어로는 **C, C++, Java** 등이 있다.  
 
@@ -39,13 +39,12 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   3. 컴파일이 완료된 후 실행되므로 런타임에서의 속도가 빠르다.  
 
 
-### ✔JavaScript의 프로그래밍 스타일(멀티-패러다임)
+### ✔ JavaScript의 프로그래밍 스타일(멀티-패러다임)
   JavaScript는 **객체지향(Object-Oriented)**, **이벤트 기반(Event-Driven)**, **함수형(Functional)** 프로그래밍 스타일을 지원하는 유연한 언어이다    
 
   **객체지향(Object-Oriented)**  
   JavaScript는 데이터를 객체 형태로 관리하며, 클래스와 프로토타입을 활용해 재사용 가능한 코드를 작성할 수 있고 객체지향 프로그래밍을 통해 데이터와    동작을 묶어서 더 구조적인 코드를 작성할 수 있다.    
 
-  **예시:**  
   ```javascript
       class Person {
         constructor(name, age) {
@@ -64,7 +63,6 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   **이벤트 기반(Event-Driven)**  
   JavaScript는 사용자 입력(클릭, 키보드 입력)이나 시스템 이벤트(타이머 완료, 네트워크 요청 완료)에 반응하는 코드를 작성할 수 있는 이벤트 중심의  모델을 제공하며 이를 통해 동적인 웹 애플리케이션을 구축할 수 있습니다.  
 
-  **예시:**  
   ```javascript
       document.getElementById("myButton").addEventListener("click", () => {
         console.log("Button Click!");
@@ -74,7 +72,6 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   **함수형(Functional)**  
   JavaScript에서는 함수가 하나의 값처럼 취급된다 즉, 변수에 저장하거나 다른 함수의 인수로 전달할 수 있으며 이를 통해 고차 함수를 활용하여 간결하고 재사용 가능한 코드를 작성할 수 있다.   
 
-  **예시:**   
   ```javascript
       const numbers = [1, 2, 3, 4, 5];
 
@@ -105,18 +102,37 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
   
 # 자바스크립트의 메모리 구조
 
-  <img src="/study\assets\js-memory.png" />
+  <img src="/study\assets\js-v8.png" />
 
-  **Memory Heap** 
-    - 동적으로 생성된 객체와 함수가 저장되는 메모리 영역  
-    - 객체나 배열 같은 참조 타입 데이터는 힙에 저장  
-  **Call Stack** 
-    - 함수 호출이 관리되는 메모리 영역  
-    - 함수가 호출되면 스택에 추가되고, 실행이 완료되면 스택에서 제거된다  
+  **Memory Heap**   
+  - 동적으로 생성된 객체와 함수가 저장되는 메모리 영역  
+  - 객체나 배열 같은 참조 타입 데이터는 힙에 저장  
+  **Call Stack**   
+  - 함수 호출이 관리되는 메모리 영역  
+  - 함수가 호출되면 스택에 추가되고, 실행이 완료되면 스택에서 제거된다  
 
-### ✔호출 스택
-자바스크립트의 런타임 환경은 JavaScript엔진(Memory Heap , Call Stak), Web APIs, Callback Queue, Event Loop 등으로 이루어져 있으며
-싱글 스레드 언어이다 한번에 하나의 작업만 실행할 수 있다 하지만 웹브라우저와 같은 환경에서 자바스크립트는 비동기 작업과 
- Web ApIs, Callback Queue, Event Loop를 활용해 여러 작업이 동시에 실행 되는것처럼 보이게 된다.
+### ✔ 호출 스택
+  자바스크립트는 **싱글스레드**  로 작업을 처리한다 Call Stack에 쌓인 함수나 코드를 위에서 부터 아래로 차례대로 실행한다
+  순서 대로 실행함으로 하나의 작업이 끝날 때까지 또 다른 작업을 실행하지 않는다.
+
+  ```javascript
+      function first() {
+          second();
+          console.log("first");
+      }
+
+      function second(){
+          third();
+          console.log("second");
+      }
+      function third(){
+          console.log("third");
+      }
+
+      first(); // 함수 호출
+
+  ```
+
+
 
 
