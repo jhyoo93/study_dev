@@ -16,10 +16,19 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 
   ```javascript
        let str = 42;      // 숫자 타입
-       console.log(typeof str); // "number"
-
+       console.log(typeof str);
+       
+      /**
+       * "number"
+       */
+       
        str = "Hello!";   // 문자열 타입으로 변경
-       console.log(typeof str); // "string"
+       console.log(typeof str);
+
+      /**
+       * "string"
+       */
+
   ```
   이러한 동적 특성은 개발 초기 단계에서는 편리하지만, 대규모 프로젝트에서는 타입 혼란을 초래할 수 있다.
 
@@ -58,6 +67,11 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 
       const john = new Person("John", 30);
       john.greet();
+
+      /**
+       * Hi, I am John and I am 30 years old.
+       */
+
   ```
 
   **이벤트 기반(Event-Driven)**  
@@ -67,6 +81,12 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
       document.getElementById("myButton").addEventListener("click", () => {
         console.log("Button Click!");
       });
+
+      /**
+       * 버튼 클릭시 이벤트 발생
+       * Button Click!
+       */
+
   ```
 
   **함수형(Functional)**  
@@ -77,11 +97,19 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
 
       // 고차 함수 예시: 배열의 각 요소를 두 배로 변환
       const doubled = numbers.map(num => num * 2);
-      console.log(doubled); // [2, 4, 6, 8, 10]
+      console.log(doubled); // 
+
+      /**
+       * [2, 4, 6, 8, 10]
+       */
 
       // 함수 자체를 값처럼 사용
       const greet = name => `Hello, ${name}!`;
       console.log(greet("Alice"));
+
+      /**
+       * Hello, Alice!
+       */
   ```
 
 
@@ -134,8 +162,6 @@ JavaScript는 **동적(dynamic)** 이고, **인터프리터(interpreted)** 방�
       first(); // 호출
       
       /**
-       * console
-       * 
        * third
        * second
        * first
