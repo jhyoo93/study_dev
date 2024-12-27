@@ -147,6 +147,13 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   
 # 자바스크립트의 메모리 구조
 
+  ### ✔ 런타임(Run time)  
+    자바스크립트 엔진은 **싱글 스레드** 기반 언어이기 때문에, 다른 작업을 수행하려면 현재 수행중인 작업이 끝날때 까지 기다려야하는  
+    문제점이 있었다 또한, 많은 시간이 걸리는 작업을 수행하게 된다면 프로그램이 느려질 우려가 있다.
+
+    그러므로 오랜 시간이 걸리는 작업들은 백그라운드에서 처리하고 간단하게 처리할 수 있는 작업들만 Call Stack에서 처리해 효율적으로
+    처리가 가능하다 이러한 과정들을 가능하게 해주는 것이 바로 자바스크립트 런타임 환경 이다.
+
   <img src="/study\assets\js-v8.png" />
 
   자바스크립트를 실행하기 위해서는 엔진이 필요하다. 자바스크립트 엔진은 코드를 실행하는 프로그램 또는 인터 프리터이다.   
@@ -219,11 +226,179 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   콜 스택은 정해진 스택 사이즈가 존재하고, 하나씩 쌓이기 때문에 정해진 용량을 초과하게 되면 에러가 발생하게 된다.   
   흔히들 이것을 Stack Overflow라고 말한다 유명한 개발자 포럼 사이트의 이름도 이것에서 따온 것이다.
 
-### ✔ 런타임(Run time)  
-  자바스크립트 엔진은 **싱글 스레드** 기반 언어이기 때문에, 다른 작업을 수행하려면 현재 수행중인 작업이 끝날때 까지 기다려야하는  
-  문제점이 있었다 또한, 많은 시간이 걸리는 작업을 수행하게 된다면 프로그램이 느려질 우려가 있다.
+  ### ✔ 블로킹(Blocking)과 논블로킹(Non-blocking)
+    - 블로킹  
+      컴퓨터가 특정 작업이 완료될 때까지 프로그램의 실행을 멈추며, 다른 작업은 해당 작업이 끝난 후에 순차적으로 처리된다  
+      작업 시간이 길어질수록 성능저하가 발생할수 있다.
 
-  그러므로 오랜 시간이 걸리는 작업들은 백그라운드에서 처리하고 간단하게 처리할 수 있는 작업들만 Call Stack에서 처리해 효율적으로
-  처리가 가능하다 이러한 과정들을 가능하게 해주는 것이 바로 자바스크립트 런타임 이다.
+    - 논블로킹
+      블로킹 방식과 반대로 작업을 요청한 후 즉시 다음 작업을 실행한다 작업이 완료되면 콜백, Promise, async/await   
+      같은 비동기 메커니즘을 통해 결과를 처리한다 그러므로 실행 흐름이 멈추지 않아 효율적이다.
+  
+---   
 
-  <img src="/study\assets\run-time.png" />
+# 이벤트루프(Event Loop)
+
+  <img src="/study\assets\run-time.png" />  
+
+  자바스크립트의 런타임 환경에서 비동기 작업을 처리하고, 콜 스택(Call Stack)과 태스크 큐(Task Queue) 사이에서 작업을 조정하여   
+  싱글 스레드에서 비동기 코드가 실행될 수 있도록 관리하는 **메커니즘** 이다.  
+
+  ### ✔ 주요 구성 요소
+  
+  **메모리 힙(Memory Heap)**   
+    - 컴퓨터가 정보를 저장하는 곳이다. 즉 자바스크립트의 객체, 배열, 함수 등의 데이터가 저장되는 공간이다  
+     
+  **콜 스택(Call Stack)**   
+    - 자바스크립트의 할 일 목록이라고 생각하면된다 함수를 호출하게 되면 해당 함수의 정보가 콜 스택에 쌓이게 되고,   
+      먼저 들어간 것이 마지막에 나오는 **FILO(First In Last Out)** 후입 선출 구조입니다.
+
+  📌📌  
+  웹 API(Web APIs)와 콜백 큐(Callback Queue)는 자바스크립트 엔진 외부에서 관리되며, 주로 브라우저나 Node.js와 같은     
+  자바스크립트 런타임 환경에서 제공된다.
+
+  **웹 API(Web APIs)**   
+    - 브라우저가 제공하는 다양한 기능들을 의미한다. 예를들어 HTTP요청, setTimeout 등의 기능들이 포함되며 주로   
+      비동기적으로 처리가 된다.
+
+  **콜백 큐(Callback Queue)**       
+    - 비동기 작업(setTimeout, HTTP 요청)의 결과나 나중에 실행되어야 하는 작업들이 대기하는 공간이다.   
+      먼저 들어간 작업이 먼저 나가는 **FIFO(First In First Out)** 선입 선출 구조이다 이공간에 대기하고 있는  
+      콜백 함수들은 콜스택이 비어있을 떄 먼저 대기열에 들어온 순서대로 실행된다.
+
+   📌📌  
+   비동기 함수는 콜백 큐(Callback Queue)에 쌓이지 않는다.  
+
+   **태스크 큐(Task Queue)**   
+    - 일반적으로 매크로 태스크(Macrotask Queue)라고도 부른다 setTimeout, setInterval, fetch 등의 비동기 작업이 이곳에 대기한다.
+
+  **마이크로태스크 큐(Microtask Queue)**  
+    - 프로미스(Promise)의 콜백 함수나 async / await과 같은 코드가 이곳에 대기한다.  
+
+  **애니메이션 프레임(Animation Frames)**  
+    - 브라우저 환경에서 화면을 업데이트 하는 작업도 비동기적으로 처리된다 주로 requestAnimationFrames와   
+      같은 코드가 여기에 대기한다.  
+
+  ### ✔ 동작 과정  
+
+  <img src="/study\assets\event-loop.png" />
+
+  **콜 스택(Call Stack) 확인**   
+    - 이벤트 루프는 먼저 콜 스택이 비어 있는지 확인한다. 만약 콜 스택에 아직 처리되지 않은 함수가 있다면,   
+      해당 함수가 완전히 실행될 때까지 대기한다.
+
+  **콜백 큐(Callback Queue) 확인**    
+    - 콜 스택이 비어 있다면, 콜백 큐를 다음으로 확인한다 콜 백큐에는 비동기 작업(setTimeout, HTTP 요청)들이 대기한다
+
+  **함수 이동**   
+    - 콜백 큐 에서 대기하고있는 함수를 콜스택으로 옮긴다.  
+
+  **함수 실행**  
+    - 이동한 해당 함수가 콜 스택에서 실행되고 실행이 끝나면 콜 스택을 빠져나가게 된다.  
+
+  📌**setTimeOut 내부 동작 과정** 
+
+   ```javascript
+      function bar() {
+        setTimeout(() => {
+          console.log("Second")
+        }, 500);
+      }
+
+      function foo() {
+        console.log("First");
+      }
+
+      function baz() {
+        console.log("Third");
+      }
+
+      bar();
+      foo();
+      baz();
+
+       /**
+       * First
+       * Third
+       * Second
+       */
+  ```   
+  1. bar() 함수가 호출되고 그안의 setTimeout() 함수가 호출되어 스택에 쌓임  
+  2. setTimeout() 함수의 매개변수에 할당된 콜백 함수를 Timer Web API에 전달  
+  3. 다음 foo() 함수가 호출되고 콘솔창(output)에 "First" 가 출력  
+  4. 이때 500 밀리초 대기 시간이 만료되면서, 이벤트 루프는Timer Web API에서 가지고 있던 콜백 함수를 Task Queue 로 옮김  
+  5. 그다음 baz() 함수가 호출되고 콘솔창에 "Third" 가 출력  
+  6. 스택에 있는 모든 메인 자바스크립트 코드가 실행 완료 되어 Call Stack이 비워짐  
+  7. 이벤트 루프는 Call Stack 이 비어있는 경우를 탐지하여, Task Queue 에 있는 콜백 함수를 Call Stack 으로 옮김  
+  8. Call Stack 에서 콜백 함수 코드를 실행하게 되고 콜솔창에는 "Second" 가 출력  
+
+
+  📌**Promise 내부 동작 과정**   
+
+  **Task Queue 와 Microtask Queue**  
+  Callback Queue는 Web API가 수행한 비동기 함수를 넘겨받아 Event Loop가 해당 함수를 Call Stack에 넘겨줄 때까지 비동기 함수들을  쌓아놓는 곳이다. Callback Queue의 종류에는 (Macro)Task Queue, MicroTask Queue 2가지가 있으며 그중 Promise 객체의 콜백이 쌓이는 곳이 바로 MicroTask Queue이다 그 어떤 곳보다 가장 먼저 우선으로 콜백이 처리되게 된다.  
+
+  ```javascript
+      console.log('Start!'); 
+
+      setTimeout(() => {
+        console.log('Timeout!');
+      }, 0);
+
+      Promise.resolve('Promise!').then(res => console.log(res));
+
+      console.log('End!');
+
+      /**
+       * Start!
+       * End!
+       * Promise!
+       * Timeout!
+       */
+  ```
+
+  1. Call Stack에 console.log('Start!') 코드 부분이 쌓인 뒤 실행 되어 콘솔창에 "Start!" 가 출력  
+  2. setTimeout 코드가 콜 스택에 적재되고 실행되면, 그 안의 콜백 함수가 이벤트 루프에 의해 Web API로 옮겨지고 타이머가 작동  
+  3. 타이머가 종료됨에 따라 setTimeout 의 콜백 함수는 MacroTask Queue에 이벤트 루프에 의해 적재   
+  4. Promise 코드가 콜스택에 적재 되어 실행되고 then 핸들러의 콜백 함수가 이벤트 루프에 의해 MicroTask Queue에 적재  
+  5. console.log('End!') 코드가 실행되고 "End!" 텍스트가 콘솔창에 출력  
+  6. 모든 메인 스레드의 자바스크립트 코드가 실행이되어 더이상 Call Stack엔 실행할 스택이 없어 비워짐  
+  7. 그러면 이벤트 핸들러가 이를 감지하여, Callback Queue에 남아있는 콜백 함수들을 빼와 Call Stack에 적재  
+  8. 이때 2종류의 Queue 중 MicroTask Queue에 남아있는 콜백이 우선적으로 처리  
+  9. MicroTask Queue가 비어지면, 이제 이벤트 루프는 MacroTask Queue에 있는 콜백 함수를 Call Stack에 적재해 실행  
+
+  📌**Async/Await 내부 동작 과정**
+  자바스크립트의 Async/Await 는 비동기 논블로킹 동작을 동기적으로 처리하기 위해 ES7 부터 새롭게 도입된 것으로   
+  복잡한 콜백이나 then 핸들러의 지옥(hell) 코드를 극복하는 핵심이다.  
+
+  ```javascript
+      const one = () => Promise.resolve('One!');
+
+      async function myFunc(){
+        console.log('In function!');
+        const res = await One();
+        console.log(res);
+      }
+
+      console.log('Before Function!');
+      myFunc();
+      console.log('After Function!');
+
+      /**
+       * Start!
+       * End!
+       * Promise!
+       * Timeout!
+       */
+  ```  
+
+  1. 콘솔에 'Before Function!' 이 출력된다.    
+  2. async 함수인 myFunc() 이 호출된다.    
+  3. async 함수 안에 있는 콘솔 함수가 실행되어 콘솔에 'In Function!' 이 출력된다.    
+  4. Promise 객체를 반환하는 one() 비동기 함수를 호출된다.    
+  5. 이때 one() 비동기 함수 왼쪽에 await 키워드로 인해, myFunc 함수의 내부 실행은 잠시 중단되고 Call stack 에서 빠져나와   
+     나머지 부분은 Microtask Queue 에 적재된다 이는 자바스크립트 엔진이 await 키워드를 인식하면 async 함수의 실행은 지연되는   것으로 처리하기 때문이다.  
+  6. 마지막으로 콘솔에 'After Function!' 이 출력된다.   
+  7. 모든 메인 스레드의 자바스크립트 코드가 실행이되어 더이상 Call Stack엔 실행할 스택이 없어 비워지게 된다.  
+  8. 이벤트 핸들러가 이를 감지하여, Microtask Queue에 남아있는 async 함수를 빼와 Call Stack에 적재하게 된다.
+  9. Promise 객체의 결과물인 'One!' 문자열을 변수 res 에 받고 이를 콘솔에 출력한다.
