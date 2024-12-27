@@ -335,7 +335,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   8. Call Stack 에서 콜백 함수 코드를 실행하게 되고 콜솔창에는 "Second" 가 출력  
 
   ---
-  
+
   📌**Promise 내부 동작 과정**   
 
   **Task Queue 와 Microtask Queue**  
@@ -370,7 +370,9 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   8. 이때 2종류의 Queue 중 MicroTask Queue에 남아있는 콜백이 우선적으로 처리  
   9. MicroTask Queue가 비어지면, 이제 이벤트 루프는 MacroTask Queue에 있는 콜백 함수를 Call Stack에 적재해 실행  
 
-  📌**Async/Await 내부 동작 과정**
+  ---
+
+  📌**Async/Await 내부 동작 과정**   
   자바스크립트의 Async/Await 는 비동기 논블로킹 동작을 동기적으로 처리하기 위해 ES7 부터 새롭게 도입된 것으로   
   복잡한 콜백이나 then 핸들러의 지옥(hell) 코드를 극복하는 핵심이다.  
 
