@@ -393,7 +393,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
        * Before Function!
        * In function!
        * After Function!
-       * 
+       * One!
        */
   ```  
 
@@ -416,12 +416,30 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
   Promise와 async/await 같은 현대적 비동기 패턴을 사용하면 이를 효과적으로 해결할 수 있다 이를 통해 코드의 가독성과 유지보수성을   높일 수 있게된다.
 
+  ```javascript
+      step1(function (value1) {
+        step2(function (value2) {
+            step3(function (value3) {
+                step4(function (value4) {
+                    step5(function (value5) {
+                        step6(function (value6) {
+                            // Do something with value6
+                        });
+                    });
+                });
+            });
+        });
+      });
+  ```
+  - step1에서 어떤 처리 이후 그 결과를 받아와, 인자로 전달된 익명 함수의 매개변수로 넘겨준다 이후 step2에서 또 어떤 처리를 하고,  
+    다음 익명 함수가 실행된다 이를 반복하다보면 코드가 피라미드 모양으로 기술되게 된다.  
+
+
   ---
 
 # Node.js란?  
   Chrome의 V8 JavaScript 엔진 위에서 동작하는 **JavaScript 런타임 환경으로**, 브라우저 외부에서도 JavaScript를 실행할 수 있게
-  해주며, 주로 서버 사이드 개발에 사용되며, 비동기 및 이벤트 기반 아키텍처를 제공하여 고성능, 확장성이 뛰어난 애플리케이션을  
-  개발하는데 적합 하다.  
+  해주며, 주로 서버 사이드 개발에 사용되며, 비동기 및 이벤트 기반 아키텍처를 제공하여 고성능, 확장성이 뛰어난 애플리케이션을 개발하는데 적합 하다.  
 
   Node.js 환경에서도 브라우저와 거의 비슷한 구조를 볼 수 있는데, 차이점이 있다면 내장됨 libuv 라이브러리를 사용하여 비동기 IO(입출력)를 지원한다는 점이다 또한 브라우저에서는 Web API를 사용하여 DOM조작, Ajax호출, 타이머 및 애니메이션 등과 같은 다양한 작업을    
   처리하지만, Node.js에서는 WebAPI가 아닌 Node.js API를 사용하여 파일 시스템 액세스, 네트워크 액세스, 암호화, 압축 및 해제 등과   같은 다양한 작업을 처리한다. 
