@@ -374,14 +374,14 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
   📌**Async/Await 내부 동작 과정**   
   자바스크립트의 Async/Await 는 비동기 논블로킹 동작을 동기적으로 처리하기 위해 ES7 부터 새롭게 도입된 것으로   
-  복잡한 콜백이나 then 핸들러의 지옥(hell) 코드를 극복하는 핵심이다.  
+  복잡한 콜백지옥(hell) 코드를 극복하는 핵심이다.  
 
   ```javascript
       const one = () => Promise.resolve('One!');
 
       async function myFunc(){
         console.log('In function!');
-        const res = await One();
+        const res = await one();
         console.log(res);
       }
 
@@ -390,10 +390,10 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
       console.log('After Function!');
 
       /**
-       * Start!
-       * End!
-       * Promise!
-       * Timeout!
+       * Before Function!
+       * In function!
+       * After Function!
+       * 
        */
   ```  
 
@@ -407,3 +407,26 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   7. 모든 메인 스레드의 자바스크립트 코드가 실행이되어 더이상 Call Stack엔 실행할 스택이 없어 비워지게 된다.  
   8. 이벤트 핸들러가 이를 감지하여, Microtask Queue에 남아있는 async 함수를 빼와 Call Stack에 적재하게 된다.
   9. Promise 객체의 결과물인 'One!' 문자열을 변수 res 에 받고 이를 콘솔에 출력한다.
+
+  ---
+
+  ### 콜백 지옥(Callback Hell)  
+  자바스크립트에서 비동기 작업을 처리하기 위해 콜백 함수를 중첩하여 사용하다가 코드가 지나치게 복잡하고 가독성이 떨어지게 되는   
+  상황을 말한다 이런 구조는 디버깅, 유지보수, 오류 처리를 어렵게 만든다.
+
+  Promise와 async/await 같은 현대적 비동기 패턴을 사용하면 이를 효과적으로 해결할 수 있다 이를 통해 코드의 가독성과 유지보수성을   높일 수 있게된다.
+
+  ---
+
+# Node.js란?  
+  Chrome의 V8 JavaScript 엔진 위에서 동작하는 **JavaScript 런타임 환경으로**, 브라우저 외부에서도 JavaScript를 실행할 수 있게
+  해주며, 주로 서버 사이드 개발에 사용되며, 비동기 및 이벤트 기반 아키텍처를 제공하여 고성능, 확장성이 뛰어난 애플리케이션을  
+  개발하는데 적합 하다.  
+
+  Node.js 환경에서도 브라우저와 거의 비슷한 구조를 볼 수 있는데, 차이점이 있다면 내장됨 libuv 라이브러리를 사용하여 비동기 IO(입출력)를 지원한다는 점이다 또한 브라우저에서는 Web API를 사용하여 DOM조작, Ajax호출, 타이머 및 애니메이션 등과 같은 다양한 작업을    
+  처리하지만, Node.js에서는 WebAPI가 아닌 Node.js API를 사용하여 파일 시스템 액세스, 네트워크 액세스, 암호화, 압축 및 해제 등과   같은 다양한 작업을 처리한다. 
+
+  - **Libuv 라이브러리:** Node.js에서 비동기 I/O(입출력)작업을 처리하기 위한 C 라이브러리  
+  - **Bindings (Node API):** Node.js 시스템과 V8 엔진 간의 상호작용을 가능하게 하는 C++ 라이브러리  
+  - **Event Queue:** 비동기 I/O(입출력) 작업 결과를 저장하고 처리하기 위한 자료구조(웹브라우저의 Task Queue와 비슷)
+  - **Event Loop:**  Event Queue에 저장된 I/O(입출력) 작업 결과를 처리하고, 다음 작업을 수행하도록 하는 관리자
