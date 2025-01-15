@@ -92,7 +92,7 @@
   **스코프(Scope)** 는 변수가 정의되고 접근할 수 있는 유효 범위를 의미하며   
   자바스크립트에서 스코프는 변수, 함수, 객체가 어디서 접근 가능하고 유효한지 결정한다.
 
-  - 전역스코프(Global Scope)
+  - 전역스코프(Global Scope)  
     코드 어디에서나 접근이 가능한 변수가 선언되는 스코프이며, 전역 변수는 전역객체(window, global)의 속성으로 저장된다.  
 
     ```javascript
@@ -136,7 +136,7 @@
       // console.log(blockConst); // ReferenceError: blockConst is not defined
     ```  
 
-    - 스코프 체인(Scope Chain)
+  - 스코프 체인(Scope Chain)
     자바스크립트에서 변수를 어디서 찾을지 결정하는 메커니즘이며, 현재 스코프에서 찾지 못하면 상위 스코프를 따라 올라가며 검색한다  
     최상위 스코프에 도달해도 변수를 찾지 못하면 **ReferenceError** 가 발생한다.        
 
@@ -166,7 +166,7 @@
 
     ```
 
-    - 스코프 체인의 활용 -> 클로저(Closure)  
+  - 스코프 체인의 활용 -> 클로저(Closure)  
 
 
   ---
