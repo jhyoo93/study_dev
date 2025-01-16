@@ -138,8 +138,8 @@
 
   - 스코프 체인(Scope Chain)
     자바스크립트에서 변수를 어디서 찾을지 결정하는 메커니즘이며, 현재 스코프에서 찾지 못하면 상위 스코프를 따라 올라가며 검색한다  
-    최상위 스코프에 도달해도 변수를 찾지 못하면 **ReferenceError** 가 발생한다.        
 
+    최상위 스코프에 도달해도 변수를 찾지 못하면 **ReferenceError** 가 발생한다.          
     스코프 체인은 단방향 이기 때문에 내부스코프는 상위 스코프를 참조할 수 있지만, 상위 스코프는 하위 스코프를 참조할 수 없다.  
 
     ```javascript
@@ -166,8 +166,30 @@
 
     ```
 
-  - 스코프 체인의 활용 -> 클로저(Closure)  
+  - 스코프 체인의 활용 -> 클로저(Closure)    
+    클로저(Closure)는 자바스크립트에서 함수와 그 함수가 선언된 렉시컬환경(Lexical Environment)의 조합을 의미한다.  
 
+    외부 함수의 변수를 참조하는 내부 함수를 말하며, 외부 함수가 종료된 후에도 그외부 함수의 변수에 접근할 수 있는 함수이다.  
+
+     ```javascript
+      function outer() {
+        let count = 0; // 외부 함수의 변수
+
+        return function inner() {
+          count++; // 외부 변수에 접근 및 변경
+          console.log(count);
+        };
+      }
+
+      const counter = outer(); // outer 함수 실행 후 inner 함수 반환
+      counter(); // 1
+      counter(); // 2
+      counter(); // 3
+
+    ```
+    - outer함수가 호출되면, 새로운 실행 컨텍스트가 생성된다.  
+    - 내부 함수 inner가 반환되며, outer 함수의 실행 컨텍스트는 종료된다.  
+    - 반환된 inner 함수는 count변수를 계속 참조할 수 있다(inner 함수가 outer의 렉시컬 환경을 클로저가 가지고 있기 때문).
 
   ---
 
