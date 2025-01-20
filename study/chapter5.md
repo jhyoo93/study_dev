@@ -43,20 +43,146 @@
   **실행 컨텍스트 주요 구성 요소**    
 
   📌 **Variable Environment**   
-   Variable Environment에 담기는 내용은 Lexical Environment와 같다, 하지만 최초 실행 시의 **스냅샷** 을 유지한다는 차이가 있다    
-  즉, 실행 컨텍스트를 생성할 때 Variable Environment에 정보를 먼저 담는 후 이를 그대로 복사해서 Lexical Environment를 만들고    
-  이후에는 Lexical Environment를 주로 활용한다.   
+  Variable Environment는 자바스크립트의 실행 컨텍스트의 구성 요소중 하나이며, 변수의 선언, 초기화, 할당 정보를 저장하고   
+  관리하는 구조이다.  
+   
+  Variable Environment는 Lexical Environment와 매우 유사하지만, 주로 호이스팅된 변수와 초기 상태를 관리하는데 사용된다.  
 
-  - 현재 컨텍스트 내의 식별자 정보와 외부 환경 정보를 포함한다. 
-  - 선언 시점의 LexicalEnvironment의 스냅샷을 유지하며, 이후 변경 사항은 반영되지 않는다.  
+  var로 선언된 변수는 Variable Environment에 저장되고, let과 const로 선언된 변수는 Lexical Environment에 저장된다.  
 
-    ✔ 스냅샷 이란?
-    특정 시점의 상태를 캡쳐하여 저장하는 기술 또는 데이터를 의미한다 자바스크립트에서는 주로 애플리케이션 상태, 메모리 상태, 데이터 구조의 상태, UI 상태 등을 기록하거나 관리할 때 사용된다.  
+  ```javascript
+    function example() {
+      console.log(a); // undefined (호이스팅된 변수)
+      console.log(b); // ReferenceError: Cannot access 'b' before initialization
+      console.log(c); // ReferenceError: Cannot access 'c' before initialization
 
+      var a = 10;    // Variable Environment에 저장
+      let b = 20;    // Lexical Environment에 저장
+      const c = 30;  // Lexical Environment에 저장
+
+      console.log(a); // 10
+      console.log(b); // 20
+      console.log(c); // 30
+    }
+
+    example();
+  ```  
+
+  ### Variable Environment 실행과정  
+
+  1. 실행 컨텍스트 생성
+    - Variable Environment - a가 선언되고 초기값 undefined로 설정  
+    - Lexical Environment - b와 c가 선언되지만, 초기화되지 않고 TDZ(일시적사각지대)에 놓임  
+
+  2. 코드 실행
+    - 첫 번째 console.log(a) → 출력: undefined (호이스팅된 변수)    
+    - 첫 번째 console.log(b) → ReferenceError (TDZ 상태)   
+    - 첫 번째 console.log(c) → ReferenceError (TDZ 상태)    
+    - 이후 a, b, c가 각각 초기화되고, 다음 console.log에서 해당 값이 출력    
+
+  ---
 
   📌 **Lexical Environment**  
-  - 초기에는 VariableEnvironment와 동일하지만, 이후 변경 사항이 실시간으로 반영된다.
+  **Lexical Environment(렉시컬 환경)** 은 자바스크립트에서 변수, 함수 선언, 스코프 체인을 관리하는 내부 구조이며,   
+  렉시컬 환경은 코드가 작성된 위치(즉, 함수나 블록의 선언 위치)에 따라 변수와 스코프가 결정된다.  
 
+  자바스크립트의 스코프 체인, 클로저, 실행 컨텍스트 등의 동작은 Lexical Environment를 기반으로 이루어진다.   
+
+  ### Lexical Environment의 구조   
+
+  1. Environment Record
+    - 현재 스코프 내의 변수, 함수 선언 등을 저장하는 객체이다.  
+    - 변수의 값이나 함수의 참조를 기록한다.  
+
+  2. Outer Environment Reference
+    - 상위 스코프를 참조한다.  
+    - 이를 통해 스코프 체인이 형성된다.  
+
+  ### Lexical Environment의 동작  
+  렉시컬 환경은 코드 실행전과 실행 중에 생성되며, 변수와 함수의 선언 및 값을 관리한다.  
+
+  1. 전역 Lexical Environment
+    - 자바스크립트 코드가 실행되기 전에 가장 먼저 생성된다.  
+    - 전역 변수와 함수가 등록 된다.
+
+  2. 함수 실행시 생성되는 Lexical Environment  
+    - 함수가 호출될 때 마다 새로운 Lexical Environment가 생성된다.  
+    - 함수 내부의 변수, 매개변수 등이 등록된다.  
+
+  3. 블록 스코프의 Lexical Environment
+    - let과 const로 선언된 변수는 블록 스코프를 가지며, 블록이 실행될 때 별도의 Lexical Environment가 생성된다.  
+  
+  **✔전역 Lexical Environment**  
+
+  ```javascript
+    var globalVar = 'global';
+
+    function example() {
+      console.log(globalVar); // 'global'
+    }
+
+    example();
+
+    // globalVar → 'global'
+    // example 함수 참조
+
+  ```  
+
+  **✔함수 Lexical Environment**  
+
+  ```javascript
+    function outer() {
+      var outerVar = 'outer';
+
+      function inner() {
+        var innerVar = 'inner';
+        console.log(outerVar); // 'outer'
+        console.log(innerVar); // 'inner'
+      }
+
+      inner();
+    }
+
+    outer();
+
+    /*
+
+    전역 Lexical Environment
+      - outer 함수 참조
+
+    outer 함수 Lexical Environment
+      - outerVar → 'outer'
+      - inner함수 참조
+    
+    inner 함수 Lexical Environment
+      - innerVar → 'inner'
+      - 상위 스코프 outer 함수의 Lexical Environment
+
+    */
+  ```
+
+  **Lexical Environment와 TDZ(Temporal Dead Zone)**   
+
+  ### TDZ란?
+  let과 const 변수는 **선언은 호이스팅되지만 초기화되기 전까지 TDZ(일시적 사각지대)** 에 놓이게 되며,  
+  TDZ동안 변수에 접근하려고 하면 **ReferenceError**가 발생한다.  
+
+  ```javascript
+    console.log(a); // ReferenceError
+    let a = 10;
+
+    function test() {
+      console.log(b); // ReferenceError
+      const b = 20;
+    }
+    test();
+  ```  
+
+  ### TDZ가 필요한 이유
+  - 코드가 실행되기 전에 모든 변수는 이미 메모리에 할당되지만, let과 const는 초기화 되지 않는다.  
+  - 이를 통해 선언 전에 변수에 접근하는 것을 방지 할 수 있다.  
+
+  ---
 
   📌 **ThisBinding**   
   ThisBinding은 실행 컨텍스트 생성 시 함께 초기화되며, 함수가 호출 되는 방법에 따라 다르게 설정된다.  
@@ -65,27 +191,9 @@
   - **this** 는 함수 호출 방식에 따라 값이 달라지며, 실행 컨텍스트의 구성 요소 중하나로 저장 된다.  
 
     ✔ this란?
-    자바스크립트에서 현재 실행중인 컨텍스트에서의 객체를 참조하는 키워드 이다 어떤 코드가 실행되는 환경에 따라 this가 가리키는 값은 달라지며,  
-    함수호출 방식에의해 결정된다.  
+    자바스크립트에서 현재 실행중인 컨텍스트에서의 객체를 참조하는 키워드 이다 어떤 코드가 실행되는 환경에 따라 this가 가리키는 값은 달라지며, 함수호출 방식에의해 결정된다.  
 
-  📌 **Environment Record와 호이스팅**   
-  코드 실행 전에 자바스크립트 엔진은 해당 환경의 모든 변수명을 알게되며, 이를 통해 호이스팅(Hoisting)이 발생한다.  
-
-  - Environment Record는 특정 실행 컨텍스트의 변수, 함수, 매개변수 등의 정보를 저장하는 내부 메커니즘이다.    
-  - 자바스크립트는 실행 시점에 변수를 스코프 체인 에 따라 검색하고, 값을 참조하거나 변경한다.    
-  - 함수 매개변수, (var, let, const)로 선언된 변수, 내부 함수 선언과 같은 데이터를 저장한다.  
-    
-    ✔ 식별자 정보란?
-    함수에 지정된 매개변수 식별자, 함수 자체, var로 선언된 변수의 식별자 등을 의미한다 즉, 컨텍스트 내부 전체를 처음부터 끝까지 순서대로 수집한다.  
-
-
-    ✔ 호이스팅 이란?
-    변수나 함수 선언이 실행 컨텍스트 최상단으로 끌어올려지는 현상을 말한다, 실제로 코드를 옮기지 않으며,   
-    선언만 미리 처리되고 초기화는 실제 코드 위치에서 이루어 진다.   
-
-    처리 방식으로는 var은 선언만 호이스팅되며 undefined 로 초기화 된다.  
-    let과 const 선언은 호이스팅 되지만 초기화는 코드 실행 시점에 이루어지며, 초기화 전에 접근하면 일시적으로 사각지대(TDZ - Temporal Dead Zone)에 놓이게 되며, 에러가 발생하게 된다.  
-
+  ---
 
   📌 **스코프(Scope)와 outerEnvironmentReference**     
 
