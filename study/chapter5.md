@@ -189,102 +189,102 @@
   ThisBinding은 **자바스크립트 실행 컨텍스트(Execution Context)**에서 현재 컨텍스트에서의 this 키워드가 참조하는 값을 정의하는  
   메커니즘이며, this는 함수가 호출되는 방식에 따라 값이 달라진다.  
 
-   ### this가 결정되는 방식
-   자바스크립트에서 this는 함수가 호출된 방식에 따라 달라진다.   
+  ### this가 결정되는 방식
+  자바스크립트에서 this는 함수가 호출된 방식에 따라 달라진다.   
 
-   **✔ 전역 컨텍슽트에서의 this**  
-   전역 스코프에서의 this는 전역 객체를 참조한다.  
+  **✔ 전역 컨텍스트에서의 this**  
+  전역 스코프에서의 this는 전역 객체를 참조한다.  
 
-   ```javascript
-      // 브라우저: window 
-      // Node.js: global
-      console.log(this); 
-    ```  
+  ```javascript
+    // 브라우저: window 
+    // Node.js: global
+    console.log(this); 
+  ```  
 
-   **✔ 일반 함수 호출**    
-   일반 함수 호출에서 this는 전역 객체를 참조하며, **엄격 모드(strict mode)**에서는 this가 undefined가 된다.  
+  **✔ 일반 함수 호출**    
+  일반 함수 호출에서 this는 전역 객체를 참조하며, **엄격 모드(strict mode)**에서는 this가 undefined가 된다.  
 
-   ```javascript
-      function globalFunction() {
-        console.log(this); // 브라우저: window, 엄격 모드: undefined
-      }
+  ```javascript
+    function globalFunction() {
+      console.log(this); // 브라우저: window, 엄격 모드: undefined
+    }
 
-      globalFunction();
+    globalFunction();
 
-      'use strict';
-      function strictFunction() {
-        console.log(this); // undefined
-      }
-      strictFunction(); 
-    ``` 
+    'use strict';
+    function strictFunction() {
+      console.log(this); // undefined
+    }
+    strictFunction(); 
+  ``` 
 
-   **✔ 메서드 호출**
-   객체의 메서드로 호출된 함수의 경우, this는 해당 메서드를 호출한 객체를 참조 한다.  
+  **✔ 메서드 호출**
+  객체의 메서드로 호출된 함수의 경우, this는 해당 메서드를 호출한 객체를 참조 한다.  
 
-   ```javascript
-      const obj = {
-        name: 'Alice',
-        greet() {
-          console.log(this.name); // 'Alice'
-        },
-      };
+  ```javascript
+    const obj = {
+      name: 'Alice',
+      greet() {
+        console.log(this.name); // 'Alice'
+      },
+    };
 
-      obj.greet();
-    ```  
+    obj.greet();
+  ```  
 
-    **✔ 생성자 함수 호출**  
-    생성자 함수로 호출된 경우, this는 새로 생성된 객체를 참조 한다.  
+  **✔ 생성자 함수 호출**  
+  생성자 함수로 호출된 경우, this는 새로 생성된 객체를 참조 한다.  
 
-    ```javascript
-      function Person(name) {
+  ```javascript
+    function Person(name) {
+      this.name = name;
+    }
+
+    const person1 = new Person('Alice');
+    console.log(person1.name); // 'Alice'
+  ```   
+
+  **✔ 화살표 함수**  
+  화살표 함수는 자신만의 this를 가지지 않고 상쉬 스코프의 this를 상속 받는다.  
+
+  ```javascript
+    const obj = {
+      name: 'Alice',
+      greet: () => {
+        console.log(this.name); // 상위 스코프의 this: 전역 객체 (브라우저에서는 window)
+      },
+    };
+    obj.greet(); // undefined
+
+    const parent = {
+      name: 'Bob',
+      greet() {
+        const inner = () => console.log(this.name);
+        inner(); // 'Bob'
+      },
+    };
+
+    parent.greet();
+  ``` 
+
+  **✔ 클래스에서의 this**  
+  클래스에서의 this는 기본적으로 현재 인스턴스를 참조하며, 메서드 내부에서 this는 해당 인스턴스를 가리킨다.  
+
+  ```javascript
+    class Person {
+      constructor(name) {
         this.name = name;
       }
 
-      const person1 = new Person('Alice');
-      console.log(person1.name); // 'Alice'
-    ```   
-
-    **✔ 화살표 함수**  
-    화살표 함수는 자신만의 this를 가지지 않고 상쉬 스코프의 this를 상속 받는다.  
-
-    ```javascript
-      const obj = {
-        name: 'Alice',
-        greet: () => {
-          console.log(this.name); // 상위 스코프의 this: 전역 객체 (브라우저에서는 window)
-        },
-      };
-      obj.greet(); // undefined
-
-      const parent = {
-        name: 'Bob',
-        greet() {
-          const inner = () => console.log(this.name);
-          inner(); // 'Bob'
-        },
-      };
-
-      parent.greet();
-    ``` 
-
-    **✔ 클래스에서의 this**  
-    클래스에서의 this는 기본적으로 현재 인스턴스를 참조하며, 메서드 내부에서 this는 해당 인스턴스를 가리킨다.  
-
-    ```javascript
-      class Person {
-        constructor(name) {
-          this.name = name;
-        }
-
-        greet() {
-          console.log(`Hello, my name is ${this.name}`);
-        }
+      greet() {
+        console.log(`Hello, my name is ${this.name}`);
       }
+    }
 
-      const alice = new Person('Alice');
-      alice.greet(); // Hello, my name is Alice
+    const alice = new Person('Alice');
+    alice.greet(); // Hello, my name is Alice
 
-    ``` 
+  ``` 
 
   ---
 
