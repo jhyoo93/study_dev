@@ -109,18 +109,18 @@
   1. 상태유지
     현재 상태를 기억하고 변경된 최신 상태를 유지할 수 있다.  
 
-    ```javascript
-      function debounce(callback, delay) {
-        let timer = null;
+  ```javascript
+    function debounce(callback, delay) {
+      let timer = null;
 
-        return function () {
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            callback.apply(this, arguments);
-          }, delay);
-        };
-      }
-    ```  
+      return function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          callback.apply(this, arguments);
+        }, delay);
+      };
+    }
+  ```  
     - 익명 함수는 debounce 내에서 선언되었으므로 상위 스코프가 된다.  
     - 함수는 선언된 환경의 주소를 기억하기 때문에 상위 스코프의 변수에 접근할 수 있게 되고, timer변수에 접근할 수 있게된다.  
     - timer는 디바운스가 실행될 함수와 다른 스코프에 있기 때문에 timer에 대한 최신 상태를 유지할 수 있다.  
