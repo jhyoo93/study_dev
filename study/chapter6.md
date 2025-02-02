@@ -346,6 +346,70 @@
   ```   
   - 객체의 속성을 변경하면 메모리의 동일한 객체를 수정하게 된다.  
 
+  ### 불변성을 유지하는 방법  
+
+  📌 **객체(Object)의 불변성 유지**  
+  - object.assign()을 사용한 복사  
+
+  ```javascript
+    const person = { name: 'Alice', age: 25 };
+
+    const newPerson = Object.assign({}, person, { age: 26 });
+
+    console.log(person); // { name: 'Alice', age: 25 } (원본 유지)
+    console.log(newPerson); // { name: 'Alice', age: 26 } (새로운 객체)
+
+  ```   
+  - 스프레드 연산자 사용  
+
+  ```javascript
+    const person = { name: 'Alice', age: 25 };
+
+    const newPerson = { ...person, age: 26 };
+
+    console.log(newPerson); // { name: 'Alice', age: 26 }
+
+  ```   
+
+  📌 **배열(Array)의 불변성 유지**   
+  - concat() 사용  
+
+  ```javascript
+    const arr = [1, 2, 3];
+    const newArr = arr.concat(4); // 새로운 배열 반환
+
+    console.log(arr); // [1, 2, 3]
+    console.log(newArr); // [1, 2, 3, 4]
+
+  ```  
+  - 스프레드 연산자 사용
+
+  ```javascript
+    const arr = [1, 2, 3];
+    const newArr = [...arr, 4];
+
+    console.log(newArr); // [1, 2, 3, 4]
+
+  ```  
+  - map(), filter(), reduce() 사용  
+
+  ```javascript
+    const numbers = [1, 2, 3, 4, 5];
+
+    const doubled = numbers.map(num => num * 2);
+    console.log(doubled); // [2, 4, 6, 8, 10]
+
+    const evens = numbers.filter(num => num % 2 === 0);
+    console.log(evens); // [2, 4]
+
+  ``` 
+
+
+
+
+
+
+
 
 
 
