@@ -72,6 +72,97 @@
     // 해당 주소를 참조한 newObj의 a값을 바꾸었기 때문에 두 객체 모두 반환하는 a 값이 변경됨.
 
 ```    
+# 불변성(Immutability)  
+불변성이란 **데이터가 한 번 생성되면 변경되지 않는 성질** 을 의미한다 즉, 어떤 값을 변경하려면 기존 값을 직접 수정하는 것이 아니라  
+새로운 값을 생성해야 한다.  
+
+자바스크립트에서 불변성은 **원시 타입(Primitive Type)과 객체(Object)의 차이** 에서 중요하게 다뤄지며,  
+리액트(React), 리덕스(Redux) 등의 상태 관리에서도 필수 개념이다.  
+
+📌 **원시 타입(Primitive Type) - 불변**  
+- string, number, boolean, null, undefined, symbol, bigint 등은 불변성을 가지며 한번 생성된 값을 변경 되지 않는다.  
+
+```javascript
+  let str = 'Hello';
+  str[0] = 'h'; // 변경되지 않음
+  console.log(str); // 'Hello'
+
+  let num = 10;
+  num = num + 5; // 새로운 값을 생성해 변수에 할당
+  console.log(num); // 15
+
+```  
+
+📌 **객체(Object) - 가변**  
+- Array, Object, Function 등은 가변성(Mutability)을 가지며 변수에 저장되는 것은 **참조** 이며, 원본 객체를 직접 수정 가능하다.  
+
+```javascript
+  let obj = { name: 'Alice' };
+  obj.name = 'Bob'; // 원본 객체가 변경됨
+  console.log(obj); // { name: 'Bob' }
+
+```   
+- 객체의 속성을 변경하면 메모리의 동일한 객체를 수정하게 된다.  
+
+### 불변성을 유지하는 방법  
+
+📌 **객체(Object)의 불변성 유지**  
+- object.assign()을 사용한 복사  
+
+```javascript
+  const person = { name: 'Alice', age: 25 };
+
+  const newPerson = Object.assign({}, person, { age: 26 });
+
+  console.log(person); // { name: 'Alice', age: 25 } (원본 유지)
+  console.log(newPerson); // { name: 'Alice', age: 26 } (새로운 객체)
+
+```   
+- 스프레드 연산자 사용  
+
+```javascript
+  const person = { name: 'Alice', age: 25 };
+
+  const newPerson = { ...person, age: 26 };
+
+  console.log(newPerson); // { name: 'Alice', age: 26 }
+
+```   
+
+📌 **배열(Array)의 불변성 유지**   
+- concat() 사용  
+
+```javascript
+  const arr = [1, 2, 3];
+  const newArr = arr.concat(4); // 새로운 배열 반환
+
+  console.log(arr); // [1, 2, 3]
+  console.log(newArr); // [1, 2, 3, 4]
+
+```  
+- 스프레드 연산자 사용
+
+```javascript
+  const arr = [1, 2, 3];
+  const newArr = [...arr, 4];
+
+  console.log(newArr); // [1, 2, 3, 4]
+
+```  
+- map(), filter(), reduce() 사용  
+
+```javascript
+  const numbers = [1, 2, 3, 4, 5];
+
+  const doubled = numbers.map(num => num * 2);
+  console.log(doubled); // [2, 4, 6, 8, 10]
+
+  const evens = numbers.filter(num => num % 2 === 0);
+  console.log(evens); // [2, 4]
+
+```  
+
+---
 
 # 클로저(Closure)
   클로저란 함수와 함수가 선언되었을 때의 렉시컬 환경의 조합이다.  
@@ -132,6 +223,7 @@
     클로저를 사용하면 변수를 공유하는 특성은 유지 하되 데이터를 은닉화할 수 있기 때문에, 전역변수를 대체하여  
     안전한 코드를 작성할 수 있다.  
 
+---
 
 # this
   자바스크립트에서의 this는 현재 실행 중인 코드에서 자신이 속한 객체 또는 자신이 생성할 인스턴스를 가리키는 자기 참조 변수이다.  
@@ -312,99 +404,46 @@
     getUser.bind(person, 1, 2, 3)()
     // 따라서 bind 메서드를 사용 후에 다시 한번 호출을 해주어야 this 객체 값을 얻을 수 있다.
 
-  ```
-
-# 불변성(Immutability)  
-  불변성이란 **데이터가 한 번 생성되면 변경되지 않는 성질** 을 의미한다 즉, 어떤 값을 변경하려면 기존 값을 직접 수정하는 것이 아니라  
-  새로운 값을 생성해야 한다.  
-
-  자바스크립트에서 불변성은 **원시 타입(Primitive Type)과 객체(Object)의 차이** 에서 중요하게 다뤄지며,  
-  리액트(React), 리덕스(Redux) 등의 상태 관리에서도 필수 개념이다.  
-
-  📌 **원시 타입(Primitive Type) - 불변**  
-  - string, number, boolean, null, undefined, symbol, bigint 등은 불변성을 가지며 한번 생성된 값을 변경 되지 않는다.  
-
-  ```javascript
-    let str = 'Hello';
-    str[0] = 'h'; // 변경되지 않음
-    console.log(str); // 'Hello'
-
-    let num = 10;
-    num = num + 5; // 새로운 값을 생성해 변수에 할당
-    console.log(num); // 15
-
   ```  
 
-  📌 **객체(Object) - 가변**  
-  - Array, Object, Function 등은 가변성(Mutability)을 가지며 변수에 저장되는 것은 **참조** 이며, 원본 객체를 직접 수정 가능하다.  
+# 플러그인, 라이브러리, 프레임워크 차이  
 
-  ```javascript
-    let obj = { name: 'Alice' };
-    obj.name = 'Bob'; // 원본 객체가 변경됨
-    console.log(obj); // { name: 'Bob' }
+  ### 플러그인 (Plugin)  
+  - 플러그인은 기존의 소프트웨어나 애플리케이션에 기능을 확장하거나 추가하기 위한 모듈이다.  
+  - 독립적으로 동작하지 않으며, 반드시 특정 소프트웨어(호스트)가 필요하다.  
+    
+  **특징**  
+  - 플러그인은 반드시 호스트 애플리케이션(브라우저, IDE, 게임 엔진 등)위에서만 동작한다.  
+  - 특정 기능만 추가하거나 수정한다.  
+  - 사용자가 필요에 따라 설치하거나 제거할 수 있다.  
 
-  ```   
-  - 객체의 속성을 변경하면 메모리의 동일한 객체를 수정하게 된다.  
+  **VS Code의 플러그인, 웹브라우저 확장프로그램(AdBlock, Dark Reader) 등이 있다.**    
 
-  ### 불변성을 유지하는 방법  
+  ---
 
-  📌 **객체(Object)의 불변성 유지**  
-  - object.assign()을 사용한 복사  
+  ### 라이브러리 (Library)
+  - 라이브러리는 특정 기능을 수행하는 코드를 모아놓은 재사용 가능한 코드 집합이다.  
+  - 개발자가 필요한 기능을 가져다 사용하며, 라이브러리가 개발자 코드에 종속 된다.  
 
-  ```javascript
-    const person = { name: 'Alice', age: 25 };
+  **특징**  
+  - 개발자가 라이브러리를 호출하여 필요한 작업을 수행한다.  
+  - 주로 특정 문제를 해결하는 기능에 초점(HTTP 요청, 데이터 파싱)  
+  - 개발자가 원하는 시점에 호출 가능하다.  
 
-    const newPerson = Object.assign({}, person, { age: 26 });
+  **Lodash(유틸리티 함수 모음), Axios(HTTP 요청 처리), React(사용자 인터페이스 라이브러리) 등이 있다.**    
 
-    console.log(person); // { name: 'Alice', age: 25 } (원본 유지)
-    console.log(newPerson); // { name: 'Alice', age: 26 } (새로운 객체)
+  ---   
 
-  ```   
-  - 스프레드 연산자 사용  
+  ### 프레임워크 (Framework)
+  - 프레임워크는 애플리케이션의 구조와 흐름을 미리 정의한 큰 틀이다.  
+  - 개발자가 프레임워크의 규칙에 따라 코드를 작성하며, 프레임워크가 애플리케이션의 실행 흐름을 제어한다.  
+  
+  **특징**
+  - 프레임워크가 전체 애플리케이션의 실행 흐름을 제어.  
+  - 일반적으로 다수의 기능을 포괄(라우팅, 데이터 관리, UI구성)
+  - 프레임워크의 구조와 규칙을 따라야 함.  
 
-  ```javascript
-    const person = { name: 'Alice', age: 25 };
-
-    const newPerson = { ...person, age: 26 };
-
-    console.log(newPerson); // { name: 'Alice', age: 26 }
-
-  ```   
-
-  📌 **배열(Array)의 불변성 유지**   
-  - concat() 사용  
-
-  ```javascript
-    const arr = [1, 2, 3];
-    const newArr = arr.concat(4); // 새로운 배열 반환
-
-    console.log(arr); // [1, 2, 3]
-    console.log(newArr); // [1, 2, 3, 4]
-
-  ```  
-  - 스프레드 연산자 사용
-
-  ```javascript
-    const arr = [1, 2, 3];
-    const newArr = [...arr, 4];
-
-    console.log(newArr); // [1, 2, 3, 4]
-
-  ```  
-  - map(), filter(), reduce() 사용  
-
-  ```javascript
-    const numbers = [1, 2, 3, 4, 5];
-
-    const doubled = numbers.map(num => num * 2);
-    console.log(doubled); // [2, 4, 6, 8, 10]
-
-    const evens = numbers.filter(num => num % 2 === 0);
-    console.log(evens); // [2, 4]
-
-  ``` 
-
-
+  **Next.js(React 기반 서버사이드 렌더링 프레임워크), Angular(프론트엔드 웹 애플리케이션 프레임워크), Django(파이썬 웹 프레임워크) 등이 있다.**   
 
 
 
