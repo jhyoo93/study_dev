@@ -114,3 +114,101 @@
     console.log(found); // 30 (첫 번째로 조건을 만족하는 값)
 
   ```       
+
+  📌 **findIndex()**  
+  - find()와 비슷하지만, 요소가 아니라 인덱스를 반환함.  
+  - 조건을 만족하는 요소가 없으면 -1 반환.  
+
+  ```javascript
+
+    const numbers = [10, 20, 30, 40];
+    const index = numbers.findIndex(num => num > 25);
+    console.log(index); // 2 (30의 인덱스)
+
+  ```  
+
+  📌 **flatMap()**    
+  - 각 요소를 반환한 후 1차원 배열로 평탄화(flatten)해서 반환.  
+  - map().flat()을 합친 기능.  
+
+  ```javascript
+
+    const arr = [1, 2, 3];
+    const result = arr.flatMap(num => [num, num * 2]);
+    console.log(result); // [1, 2, 2, 4, 3, 6]
+
+  ```   
+
+  📌 **reduceRight()**    
+  - reduce()와 비슷하지만 오른쪽에서 왼쪽으로 순회함.  
+  
+  ```javascript
+
+    const arr = [1, 2, 3, 4];
+    const result = arr.reduceRight((acc, num) => acc + num, 0);
+    console.log(result); // 10 (4 + 3 + 2 + 1)
+
+  ``` 
+
+# JSON(JavaScript Object Notation)  
+
+  📌 **특징**  
+  - 경량의 데이터 포맷으로 텍스트 기반(문자열)이다.  
+  - 구조화된 데이터를 직렬화(serialize)하여 네트워크에서 전송할 때 많이 사용됨.  
+  - JavaScript의 객체 표기법과 유사하며, 대부분의 프로그래밍 언어에서 쉽게 다룰수 있음.  
+
+  📌 **데이터 이동 방식**  
+  - 텍스트 기반 이동: 네트워크를 통해 문자열(String) 형태로 이동함.  
+  - HTTP 요청/응답 본문(body)에 포함되어 API통신에서 주로 사용됨.  
+  - 예를 들어, fetch()나 axios 같은 HTTP라이브러리를 통해 JSON을 송수신할 수 있음.  
+
+  ```javascript
+
+    {
+      "name": "Alice",
+      "age": 25,
+      "city": "Seoul"
+    }
+
+  ```   
+  📌 **이동 과정**  
+  1. 데이터를 JSON형식으로 변환 (Serialize)  
+
+  ```javascript
+
+    const data = { name: "Alice", age: 25, city: "Seoul" };
+    const jsonData = JSON.stringify(data); // 직렬화
+
+  ```  
+  2. 네트워크를 통해 전송   
+
+  ```javascript
+
+    fetch("https://api.example.com/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: jsonData
+    });
+
+  ```  
+  3. 수신 측에서 JSON을 파싱하여 객체로 변환 (Deserialize)  
+
+  ```javascript
+
+    fetch("https://api.example.com/user")
+      .then(res => res.json()) // JSON을 객체로 변환
+      .then(data => console.log(data));
+
+  ```  
+
+  📌 **장점**   
+  - 가벼운 데이터 형식(텍스트 기반, 바이너리보다 용량이 적음)     
+  - 가독성이 좋고, 대부분의 언어에서 지원함 (JavaScript, Python, Java 등)    
+
+  📌 **단점**    
+  - 데이터의 타입을 명확히 표현하지 못함 (모든 데이터가 문자열로 전달됨)    
+  - XML보다 유연성이 부족 (스키마 정의 없음)    
+
+---   
+
+# XML(Extensible Markup Language)
