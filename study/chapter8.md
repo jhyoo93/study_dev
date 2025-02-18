@@ -153,9 +153,9 @@
 # JSON(JavaScript Object Notation)  
 
   📌 **특징**  
-  - 경량의 데이터 포맷으로 텍스트 기반(문자열)이다.  
-  - 구조화된 데이터를 직렬화(serialize)하여 네트워크에서 전송할 때 많이 사용됨.  
-  - JavaScript의 객체 표기법과 유사하며, 대부분의 프로그래밍 언어에서 쉽게 다룰수 있음.  
+  - JavaScript 객체 문법을 기반으로 하는 경량 데이터 교환 형식이다.  
+  - 키-값 쌍 구조를 가지며, 가독성이 좋고 가볍다.   
+  - 대부분의 API 및 웹 서비스에서 기본 데이터 포맷으로 사용됨.  
 
   📌 **데이터 이동 방식**  
   - 텍스트 기반 이동: 네트워크를 통해 문자열(String) 형태로 이동함.  
@@ -165,9 +165,9 @@
   ```javascript
 
     {
-      "name": "Alice",
-      "age": 25,
-      "city": "Seoul"
+      "name": "홍길동",
+      "age": 30,
+      "hobbies": ["축구", "독서"]
     }
 
   ```   
@@ -176,7 +176,7 @@
 
   ```javascript
 
-    const data = { name: "Alice", age: 25, city: "Seoul" };
+    const jsonData = '{"name": "홍길동", "age": 30}';
     const jsonData = JSON.stringify(data); // 직렬화
 
   ```  
@@ -206,9 +206,96 @@
   - 가독성이 좋고, 대부분의 언어에서 지원함 (JavaScript, Python, Java 등)    
 
   📌 **단점**    
-  - 데이터의 타입을 명확히 표현하지 못함 (모든 데이터가 문자열로 전달됨)    
-  - XML보다 유연성이 부족 (스키마 정의 없음)    
+  - 구조를 정의할 수 없음 (ex: XML Schema 같은 기능이 없음)     
+  - 데이터가 크면 가독성이 떨어질 수 있음       
 
 ---   
 
-# XML(Extensible Markup Language)
+# XML(Extensible Markup Language)  
+
+  📌 **특징**   
+  - HTML과 비슷한 태그 기반 데이터 포맷.  
+  - 데이터를 트리 구조로 표현할 수 있어 문서 저장이나 API 응답으로 사용됨.  
+  - SOAP(Web Service)기반 API에서 여전히 사용됨.  
+
+  ```xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <person>
+        <name>홍길동</name>
+        <age>30</age>
+        <hobbies>
+            <hobby>축구</hobby>
+            <hobby>독서</hobby>
+        </hobbies>
+    </person>
+
+  ```   
+
+  📌 **장점**   
+  - 트리 구조를 가지므로 계층적 데이터 표현이 가능   
+  - 데이터 구조를 Schema(DTD, XSD)로 정의할 수 있음  
+  - 다양한 언어와 플랫폼에서 지원    
+
+  📌 **단점**    
+  - 태그 때문에 데이터 크기가 큼  
+  - 파싱 과정이 복잡하고 속도가 느림   
+  - JSON보다 사용하기 어려움        
+
+---     
+
+# Map (JavaScript의 Map 객체)  
+
+  📌 **특징**   
+  - key-value 형태로 데이터를 저장하는 JavaScript의 내장 객체.  
+  - 일반 객체보다 키를 자유롭게 설정할 수 있고, 순서가 보장됨.  
+
+  ```javascript
+
+    const person = new Map();
+    person.set("name", "홍길동");
+    person.set("age", 30);
+    person.set("hobbies", ["축구", "독서"]);
+
+    console.log(person.get("name")); // 홍길동
+    console.log(person.has("age")); // true
+    console.log(person.size); // 3
+
+  ```  
+
+  📌 **장점**   
+  - object보다 효울적인 key-value 저장 방식  
+  - key로 객체, 함수 등도 저장 가능  
+  - forEach()나 for...of를 통해 반복문 사용가능  
+
+  📌 **단점**    
+  - JSON, XML처럼 외부로 데이터를 전송하는 데 직접 사용하기 어렵고, 변환해야 함  
+  - 일반 객체보다 덜 직관적일 수 있음  
+
+---
+
+# FormData (파일 및 폼 데이터 전송)  
+
+  📌 **특징**  
+  - multipart/form-data 형식으로 HTML <form> 데이터를 서버로 전송할 때 사용.  
+  - 파일 업로드 등에 많이 활용됨.  
+
+  ```javascript
+
+    const formData = new FormData();
+    formData.append("name", "홍길동");
+    formData.append("file", fileInput.files[0]); // 파일 추가
+
+    fetch("/upload", {
+      method: "POST",
+      body: formData
+    });
+
+  ```  
+
+  📌 **장점** 
+  - 파일을 포함한 다양한 데이터 전송가능  
+  - multpart/form-data 지원  
+
+  📌 **단점**
+  - JSON 변환이 필요할 때가 많음  
