@@ -53,7 +53,7 @@
   생명주기는 컴포넌트가 생성, 업데이트, 소멸되는 과정을 말한다. 이 생명주기 메서드를 활용하면 특정 시점에서 데이터를   불러오거나, 성능을 최적화하거나, 정리(clean-up) 작업을 할 수 있으며,   
   클래스형 컴포넌트의 생명주기는 Mounting(마운트), Updating(업데이트), Unmounting(언마운트) 세단계로 나뉜다.  
 
-  <img src="/study\assets\class_render.png" />   
+  <img src="react_cs_study\assets\class_render.png" />   
  
 
   📌 **Mounting (생성)**  
