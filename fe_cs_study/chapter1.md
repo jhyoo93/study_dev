@@ -135,7 +135,7 @@
   3. 만약 요청한 URL이 캐시에 없다면, ISP의 DNS 서버가 DNS쿼리로 
     - www.google.com를 호스팅하는 서버의 IP주소를 찾는다
 
-      <img src="/study\assets\imgDomainSys02.gif" /> 
+      <img src="/fe_cs_study\assets\imgDomainSys02.gif" /> 
 
       먼저 DNS 리커서가 루트 네임 서버(Root Name Server)에 연결한다 루트 네임 서버는 리커서를 .com도메인 네임 서버로 리디렉션한다
       .com네임 서버는 google.com 네임서버로 리디렉션한다 리커서는 이를 브라우저로 다시보낸다.
@@ -154,7 +154,7 @@
 
   7. 서버가 HTTP 응답을 보낸다.
 
-  <img src="/study\assets\http-status-code.png" />    
+  <img src="/fe_cs_study\assets\http-status-code.png" />    
 
     Status Code헤더에 상태 코드가 숫자로 표시된다 이숫자는 response의 상태를 알려주기 때문에 매우 중요하다 숫자 코드를 사용하여
     HTTP응답 결과를 다섯 가지 상태로 나타낸다.

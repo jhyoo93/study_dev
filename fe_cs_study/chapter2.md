@@ -11,7 +11,7 @@
   HTML요소(element)는 태그(시작, 종료) 내용을 포함하고 있고 요소별 여러 속성을 가지고 있다
   태그의 이름과 속성 명은 소-대문자를 가리진 않지만, 소문자를 권장하고 종료 태그가 없는 경우도 존재한다
   
-  <img src="/study\assets\images_strivepdev_post.png" />
+  <img src="/fe_cs_study\assets\images_strivepdev_post.png" />
 
   ### HTML문서 기본 구조
   ```HTML
@@ -48,7 +48,7 @@
     - HTML (HyperText Markup Language): 웹 페이지의 내용을 구조화하는 마크업 언어
     - 웹 브라우저: 사용자가 웹 페이지에 접근하고 탐색하는 데 사용하는 소프트웨어(예: Chrome, Firefox, Safari)
 
-  <img src="/study\assets\html-history.png" />
+  <img src="/fe_cs_study\assets\html-history.png" />
 
     1. HTML 1.0(1991) - 최초의 HTML, 간단한 텍스트와 하이퍼링크 지원
     2. HTML 2.0(1995) - 기본 기능 표준화
@@ -70,7 +70,7 @@
 
   ### css구조
 
-  <img src="/study\assets\css-info.png" />
+  <img src="/fe_cs_study\assets\css-info.png" />
 
   - 선택자: HTML 요소의 태그, ID, Class 등으로 식별하여 수정하고자 하는 요소를 선택한다
   - 선언부: 속성과 속성 값을 입력하는 부분, 각 선언을 세미콜론으로 구분한다

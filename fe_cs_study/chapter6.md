@@ -1,6 +1,6 @@
 # 콜스택, 메모리힙 데이터 저장 구조  
 
-<img src="/study\assets\data-save-info.png" />  
+<img src="/fe_cs_study\assets\data-save-info.png" />  
 
   
 ### 원시타입 데이터(파란색 변수 a )

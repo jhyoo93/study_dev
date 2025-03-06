@@ -154,7 +154,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
     그러므로 오랜 시간이 걸리는 작업들은 백그라운드에서 처리하고 간단하게 처리할 수 있는 작업들만 Call Stack에서 처리해 효율적으로
     처리가 가능하다 이러한 과정들을 가능하게 해주는 것이 바로 자바스크립트 런타임 환경 이다.
 
-  <img src="/study\assets\js-v8.png" />
+  <img src="/fe_cs_study\assets\js-v8.png" />
 
   자바스크립트를 실행하기 위해서는 엔진이 필요하다. 자바스크립트 엔진은 코드를 실행하는 프로그램 또는 인터 프리터이다.   
   대표적인 예시로는 구글의 V8엔진이 있다. 파이어폭스의 SpiderMonkey, 사파리의 Webkit 등이 있지만,   
@@ -164,7 +164,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
   **Memory Heap**   
 
-  <img src="/study\assets\memory-heap.png" />  
+  <img src="/fe_cs_study\assets\memory-heap.png" />  
 
   **변수 선언, 함수저장, 호출 등의 작업이 발생하느 공간이다.** 예를 들어, 변수를 위해 메모리 공간을 할당하고,    
   그 공간에 값을 할당하는 것이다. 이와 같이 동작이 일어나는 공간이 메모리 힙이며, 그림으로 비유한다면 각각    
@@ -172,7 +172,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
   **Call Stack**   
 
-  <img src="/study\assets\call-stack.png" />  
+  <img src="/fe_cs_study\assets\call-stack.png" />  
 
   코드를 읽어내려가면서 수행할 작업들을 아래에서부터 차례대로 쌓고, 메모리 힙에서 작업 수행에 필요한 것들을 찾아서    
   작업을 수행하는 공간이다. 특정 함수를 실행하게 되면, 해당 함수는 콜 스택의 가장 상단에 위치하게되며 함수 실행이   
@@ -221,7 +221,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
   Call Stack의 각 단계를 스택 프레임(Stack Frame)이라고 한다. 만약 무한 루프를 도는 코드를 실행하면  
   **Maximum call stack size exceded** 에러가 발생하게 된다.  
 
-  <img src="/study\assets\call-stack.png" />
+  <img src="/fe_cs_study\assets\call-stack.png" />
 
   콜 스택은 정해진 스택 사이즈가 존재하고, 하나씩 쌓이기 때문에 정해진 용량을 초과하게 되면 에러가 발생하게 된다.   
   흔히들 이것을 Stack Overflow라고 말한다 유명한 개발자 포럼 사이트의 이름도 이것에서 따온 것이다.
@@ -239,7 +239,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
 # 이벤트루프(Event Loop)
 
-  <img src="/study\assets\run-time.png" />  
+  <img src="/fe_cs_study\assets\run-time.png" />  
 
   자바스크립트의 런타임 환경에서 비동기 작업을 처리하고, 콜 스택(Call Stack)과 태스크 큐(Task Queue) 사이에서 작업을 조정하여   
   싱글 스레드에서 비동기 코드가 실행될 수 있도록 관리하는 **메커니즘** 이다.  
@@ -281,7 +281,7 @@ JavaScript는 웹 개발을 중심으로 다양한 환경에서 활용되는 프
 
   ### ✔ 동작 과정  
 
-  <img src="/study\assets\event-loop.gif" />
+  <img src="/fe_cs_study\assets\event-loop.gif" />
 
   **콜 스택(Call Stack) 확인**   
   이벤트 루프는 먼저 콜 스택이 비어 있는지 확인한다. 만약 콜 스택에 아직 처리되지 않은 함수가 있다면,   

@@ -12,7 +12,7 @@
    
   ### ✔ 랜더링 순서  
 
-  <img src="/study\assets\render-path.png" />    
+  <img src="/fe_cs_study\assets\render-path.png" />    
 
   **HTML 파싱 → DOM 생성**  
   - HTML 파일이 브라우저에 전달되면, 브라우저는 이를 **파싱(Parsing)** 하여 **DOM(Document Object Model)** 트리를 생성한다.    
@@ -73,7 +73,7 @@
 
   **DOM + CSSOM → 렌더 트리(Render Tree) 생성**  
     
-  <img src="/study\assets\render-tree.png" />  
+  <img src="/fe_cs_study\assets\render-tree.png" />  
     
   - DOM트리와 CSSOM트리를 결합하여 렌더 트리를 생성한다.  
   - display: none처럼 화면에 표시되지 않는 요소는 렌더 트리에 포함되지 않는다  

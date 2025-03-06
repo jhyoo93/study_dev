@@ -35,7 +35,7 @@
   9. 이후 bar 함수 실행이 종료되면 콜스택에서 제거 되고 중단했던 foo 실행 컨텍스트를 이어서 실행한다.  
   
 
-  <img src="/study\assets\execution-context.png" />
+  <img src="/fe_cs_study\assets\execution-context.png" />
 
 
   ---
