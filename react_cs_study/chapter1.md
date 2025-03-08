@@ -4,22 +4,21 @@
   변환되는데, 이를 통해 React의 **가상 DOM(Virtual DOM)**을 만들고 업데이트하는 과정이 간소화된다.    
 
   📌 **가상 DOM(Virtual DOM)이란?**   
-  가상 DOM은 React에서 사용하는 성능 최적화 기업으로, 실제 DOM을 조작하는 대신 메모리에 가상의 DOM을 만들어 변경 사항을 비교한 후,  
-  최소한의 변경만 실제 DOM에 적용하는 방식이다.  
+  가상 DOM(Virtual DOM)은 React가 효율적으로 UI를 업데이트하기 위해 사용하는 개념이다.  
+  기존 DOM을 직접 조작하는 것이 아니라, 가상의 DOM을 만들어 비교한 후, 변경된 부분만 실제 DOM에 반영하는 방식이다.  
 
-  1️⃣ 브라우저의 DOM은 무겁다
-  - DOM(Document Object Model)은 HTML 요소를 트리 구조로 표현하는 방식이다.  
-  - 브라우저가 DOM을 변경하면 화면을 다시 그려야 하기때문에 성능이 저하될 수 있다.  
+  ✅ 가상 DOM이 필요한 이유  
+  1. DOM의 조작이 느리다  
+    - 브라우저의 DOM 업데이트는 비용이 많이 드는 연산이다.  
+    - document.createElement(), innerHTML 수정 등 직접 조작하면 렌더링 비용이 높아짐.  
 
-  2️⃣ 가상 DOM(Virtual DOM)은 메모리에 저장된 가짜 DOM이다  
-  - React는 실제 DOM을 직접 변경하지 않고 먼저 메모리에 가상의 DOM을 만든다.  
-  - JavaScript 객체 형태로 표현되며, 빠르게 변경 사항을 처리할 수 있다.  
+  2. 전체 DOM을 다시 렌더링해야 한다  
+    - 기존 방식에서는 작은 변화에도 전체 UI를 다시 그려야함.  
+    - 예를 들어, 버튼 클릭으로 숫자가 바뀌었을 때, 모든 요소를 다시 렌더링 해야함.  
 
-  3️⃣ 변경 사항을 비교하는 ‘Diffing’ 과정이 있다  
-  - 새롭게 변경된 가상 DOM과 기존 가상 DOM을 비교하여 달라진 부분을 찾는다.  
+  ✅ 가상 DOM 동작 방식  
 
-  4️⃣ 최소한의 변경만 실제 DOM에 적용한다
-  - 차이점을 찾은 후, 필요한 부분만 실제 DOM에 반영하여 불필요한 렌더링을 줄여 성능을 최적화한다.  
+  
 
   📌 **바벨(Babel)이란?**  
   **바벨(Babel)**은 최신 JavaScript(ES6+, JSX 등)를 **구버전 JavaScript(ES5)**로 변환해주는 **자바스크립트 컴파일러**이다.  
@@ -175,5 +174,117 @@
 
 ---
 
-# 함수형 컴포넌트를 사용하는 이유  
+# 함수형 컴포넌트 생명주기
+  함수형 컴포넌트는 React의 16.8 업데이트 이후로 클래스 컴포넌트 기능을 Hook을 통해 사용할 수 있게 되었으며,  
+  useEffect 훅을 사용하여 생명주기를 제어한다.    
   
+
+  <img src="/react_cs_study\assets\function_render.png" />   
+
+  📌 **Mount(생성)**  
+  컴포넌트가 처음 렌더링될 때 실행되며, 클래스형의 componentDidMount()와 동일한 역할을 useEffect로 처리한다.  
+
+  ```javaScript
+    import { useEffect } from "react";
+
+    const Component = () => {
+      useEffect(() => {
+        console.log("✅ 컴포넌트가 마운트됨!");
+
+        // 예제: API 데이터 가져오기
+        fetch("https://api.example.com/data")
+          .then(response => response.json())
+          .then(data => console.log("API 데이터:", data));
+
+      }, []); // 의존성 배열 `[]` → 마운트 시 한 번만 실행됨
+
+      return <h1>Hello, World!</h1>;
+    };
+
+    export default Component;
+
+  ``` 
+  - useEffect(() => {...}, []) → []을 전달하면 마운트 시 한 번만 실행됨.  
+  - API를 호출하거나 이벤트 리스너를 등록할 때 사용.  
+
+  ---
+  
+  📌 **Update(변경)**  
+  컴포넌트의 props나 state가 변경될 떄 실행되며, 클래스형의 componentDidUpdate(prevProps, prevState)와 동일한 역할을 한다.  
+
+  ```javaScript
+    import { useState, useEffect } from "react";
+
+    const Counter = () => {
+      const [count, setCount] = useState(0);
+
+      useEffect(() => {
+        console.log(`🔄 count가 변경됨: ${count}`);
+      }, [count]); // count가 변경될 때만 실행됨
+
+      return (
+        <div>
+          <h1>Count: {count}</h1>
+          <button onClick={() => setCount(count + 1)}>Increase</button>
+        </div>
+      );
+    };
+
+    export default Counter;
+  ``` 
+  - useEffect(() => {...}, [count]) → count 값이 변경될 때마다 실행됨.  
+  - 특정 state나 props가 변경될 때마다 실행되는 코드 작성 가능.  
+
+  ---
+
+  📌 **Unmount(제거)**  
+  컴포넌트가 화면에서 제거될 때 실행되며, 클래스형의 componentWillUnmount()와 동일한 역할을 한다.  
+
+  ```javaScript
+    import { useEffect, useState } from "react";
+
+    const Timer = () => {
+      const [time, setTime] = useState(0);
+
+      useEffect(() => {
+        console.log("타이머 시작");
+        const interval = setInterval(() => {
+          setTime(prevTime => prevTime + 1);
+        }, 1000);
+
+        return () => {
+          console.log("타이머 정리됨");
+          clearInterval(interval); // 컴포넌트가 언마운트될 때 실행
+        };
+      }, []);
+
+      return <h1>Time: {time} seconds</h1>;
+    };
+
+    export default Timer;
+  ```   
+  - useEffect 내부에서 return을 사용하면 컴포넌트가 언마운트될 때 실행됨.  
+  - 이벤트 리스너 해제, setInterval 정리 등에 사용.
+
+---  
+
+# 함수형 컴포넌트를 사용하는 이유
+
+  - **코드가 더 간결하고 직관적이다**     
+    클래스형 컴포넌트는 this를 사용해야 해서 코드가 길어지고 복작해지는 반면,  
+    함수형 컴포넌트는 this없이도 동작하여 코드가 훨씬 간결하다.  
+
+  - **생명주기 관리가 더 쉽다**    
+    클래스형 컴포넌트에서는 componentDidMount, componentDidUpdate, componentWillUnmount를 따로 관리해야 하는 반면,
+    함수형 컴포넌트에서는 useEffect 하나로 마운트, 업데이트, 언마운트 모두 처리할 수 있다.  
+
+  - **성능이 더 좋다 (가벼운 컴포넌트)**    
+    클래스형 컴포넌트는 컴포넌트 인스턴스를 생성해야 하므로 메모리 사용량이 증가 하며, 함수형 컴포넌트는  
+    불필요한 인스턴스 없이 바로 렌더링되므로 더 가볍고 빠르다.  
+
+  - **hook을 통한 유연한 개발 가능**    
+    React에서는 **Hook(useState, useEffect, useContext 등)** 을 도입하면서 함수형 컴포넌트가 더욱 강력해졌다.  
+
+  - **React공식 문서에서 함수형 컴포넌트 사용 권장**    
+    React의 최신 기능 (Suspense, Concurrent Mode 등)은 함수형 컴포넌트에서 더 잘 동작하며,  
+    Next.js Remix등 최신 프레임워크들은 함수형 컴포넌트 중심으로 설계 되었다.   
