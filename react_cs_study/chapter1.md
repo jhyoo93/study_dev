@@ -1,13 +1,14 @@
 # JSX란?
-  JSX(JavaScript XML)는 React에서 UI를 선언적으로 작성할 수 있도록 돕는 **문법 확장(Syntax Extension)**이다.    
+  JSX(JavaScript XML)는 React에서 UI를 선언적으로 작성할 수 있도록 돕는 **문법 확장(Syntax Extension)** 이다.    
   JavaScript코드에서 HTML 처럼 보이지만 JavaScript의 기능을 포함할 수 있는 특별한 문법이다 JSX는 React.createElement() 호출로    
-  변환되는데, 이를 통해 React의 **가상 DOM(Virtual DOM)**을 만들고 업데이트하는 과정이 간소화된다.    
+  변환되는데, 이를 통해 React의 **가상 DOM(Virtual DOM)** 을 만들고 업데이트하는 과정이 간소화된다.    
 
   📌 **가상 DOM(Virtual DOM)이란?**   
   가상 DOM(Virtual DOM)은 React가 효율적으로 UI를 업데이트하기 위해 사용하는 개념이다.  
   기존 DOM을 직접 조작하는 것이 아니라, 가상의 DOM을 만들어 비교한 후, 변경된 부분만 실제 DOM에 반영하는 방식이다.  
 
-  ✅ 가상 DOM이 필요한 이유  
+  ✅ 가상 DOM이 필요한 이유 - 기존 DOM의 문제점  
+
   1. DOM의 조작이 느리다  
     - 브라우저의 DOM 업데이트는 비용이 많이 드는 연산이다.  
     - document.createElement(), innerHTML 수정 등 직접 조작하면 렌더링 비용이 높아짐.  
@@ -16,9 +17,20 @@
     - 기존 방식에서는 작은 변화에도 전체 UI를 다시 그려야함.  
     - 예를 들어, 버튼 클릭으로 숫자가 바뀌었을 때, 모든 요소를 다시 렌더링 해야함.  
 
-  ✅ 가상 DOM 동작 방식  
+  ✅ 가상 DOM 동작 방식 - React의 렌더링 과정  
+  React는 가상 DOM을 사용하여 최적화된 UI 업데이트를 수행한다.  
 
-  
+  1. 새로운 가상 DOM 생성  
+    - 상태(state) 또는 props가 변경되면, 새로운 가상 DOM을 생성한다.  
+
+  2. 이전 가상 DOM과 비교 (Diffing)  
+    - React는 이전 가상 DOM과 새로운 가상 DOM을 비교하여 변경된 부분을 찾는다.  
+    - 이 과정에서 **"Reconciliation(조정)"**  이라는 React의 내부 알고리즘이 사용된다.  
+
+  3. 실제 DOM을 최소한으로 업데이트  
+    - 변경된 부분만 실제 DOM에 반영하여 렌더링 성능을 최적화 한다. 
+
+  ---
 
   📌 **바벨(Babel)이란?**  
   **바벨(Babel)**은 최신 JavaScript(ES6+, JSX 등)를 **구버전 JavaScript(ES5)**로 변환해주는 **자바스크립트 컴파일러**이다.  
@@ -27,6 +39,8 @@
   - 최신 JavaScript를 지원하지 않는 구형 브라우저 IE, 구버전 Chrome등이 있다.  
   - 최신 JavaScript문법 -> ES5코드로 변환하여 모든 브라우저에서 실행 가능하도록 한다.  
 
+  --- 
+  
   📌 **React Fiber란?**   
   React Fiber는 React 16부터 도입된 새로운 조정(Reconciliation) 알고리즘으로, UI 엄데이트를 더 빠르고 부드럽게 수행하기 위한 구조이다.  
 
@@ -179,7 +193,7 @@
   useEffect 훅을 사용하여 생명주기를 제어한다.    
   
 
-  <img src="/react_cs_study\assets\function_render.png" />   
+  <img src="/react_cs_study\assets\function_render.jpg" />   
 
   📌 **Mount(생성)**  
   컴포넌트가 처음 렌더링될 때 실행되며, 클래스형의 componentDidMount()와 동일한 역할을 useEffect로 처리한다.  
